@@ -34,52 +34,12 @@ public class Juego extends JFrame {
         ImageIcon logoIcon = new ImageIcon(".\\.\\img\\logo_G3_2.PNG");
 
     
-        Color lineColor = new Color(255, 255, 255, 150); 
-    
-
-        // Botón de enviar
-        JButton enviarButton = new JButton("Insertar Juego");
-        enviarButton.setBounds(40, 135, 190, 38);
-        enviarButton.setBackground(new Color(255, 102, 102)); 
-        enviarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-              
-            }
-        });
+        Color lineColor = new Color(255, 255, 255, 150);
         getContentPane().setLayout(null);
         panel.setLayout(null);
-        panel.add(enviarButton);
 
         
         getContentPane().add(panel);
-        
-        JButton btnStock = new JButton("Stock");
-        btnStock.setBounds(40, 184, 190, 38);
-        btnStock.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
-        btnStock.setBackground(new Color(255, 102, 102));
-        panel.add(btnStock);
-        
-        JButton enviarButton_2_1 = new JButton("Gestionar Clientes");
-        enviarButton_2_1.setBounds(40, 232, 190, 38);
-        enviarButton_2_1.setBackground(new Color(255, 102, 102));
-        panel.add(enviarButton_2_1);
-        
-        JLabel lblNewLabel_1 = new JLabel("Bienvenido Trabajador ");
-        lblNewLabel_1.setBounds(40, 94, 217, 30);
-        lblNewLabel_1.setForeground(new Color(255, 255, 255));
-        lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-        panel.add(lblNewLabel_1);
-        
-        JLabel lblNewLabel_2 = new JLabel("alguien.trabajador@gmail.com");
-        lblNewLabel_2.setBounds(354, 284, 297, 30);
-        lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblNewLabel_2.setForeground(new Color(255, 255, 255));
-        lblNewLabel_2.setBackground(new Color(255, 255, 255));
-        panel.add(lblNewLabel_2);
         
         JPanel panel_1 = new JPanel();
         panel_1.setBounds(0, 0, 696, 59);
@@ -132,21 +92,6 @@ public class Juego extends JFrame {
         separator.setBackground(new Color(0, 255, 255));
         separator.setBounds(0, 60, 686, 8);
         panel.add(separator);
-        
-        JButton enviarButton_2_1_1 = new JButton("Insertar Trabajadores");
-        enviarButton_2_1_1.setBackground(new Color(255, 102, 102));
-        enviarButton_2_1_1.setBounds(40, 281, 190, 38);
-        panel.add(enviarButton_2_1_1);
-        
-        JButton enviarButton_2_1_1_1 = new JButton("Insertar Proovedores");
-        enviarButton_2_1_1_1.setBackground(new Color(255, 102, 102));
-        enviarButton_2_1_1_1.setBounds(40, 330, 190, 38);
-        panel.add(enviarButton_2_1_1_1);
-        
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(".\\.\\img\\CU-6.png"));
-        lblNewLabel.setBounds(412, 94, 190, 179);
-        panel.add(lblNewLabel);
 
         setVisible(true); 
         
