@@ -5,11 +5,15 @@ import java.awt.*;
 import java.sql.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.border.LineBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 public class Juego extends JFrame {
     private JTextField txtBuscar;
     private JPanel panelTabla;
+    private JScrollPane scrollPane;
+    private JPanel panelBotones;
+    private JPanel panelLogo;
 
     public Juego() {
         setTitle("Menu Trabajador");
@@ -52,54 +56,94 @@ public class Juego extends JFrame {
     }
 
     private JPanel crearPanelSuperior() {
-        JPanel panel_1 = new JPanel(new BorderLayout());
+        JPanel panel_1 = new JPanel(new BorderLayout()); // Utilizando BorderLayout
         panel_1.setBackground(new Color(30, 30, 90));
+        panel_1.setBorder(new EmptyBorder(0, 40, 0, 40)); // Margen vertical de 10px arriba y abajo, y margen lateral de 40px
 
-        txtBuscar = new JTextField("Buscar", 20);
+        txtBuscar = new JTextField("Buscar", 15);
+        txtBuscar.setMinimumSize(new Dimension(7, 0));
         txtBuscar.setForeground(Color.WHITE);
-        txtBuscar.setFont(new Font("Times New Roman", Font.BOLD, 11));
-        txtBuscar.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createEmptyBorder(20, 20, 20, 0), // Ajuste de espacio a la izquierda del JTextField
-                BorderFactory.createLineBorder(Color.WHITE))); // Borde blanco
-        txtBuscar.setOpaque(false);
-        txtBuscar.setHorizontalAlignment(SwingConstants.CENTER);
-        panel_1.add(txtBuscar, BorderLayout.WEST);
-
-        JSeparator separator = new JSeparator();
-        separator.setBackground(new Color(255, 128, 128));
-        separator.setForeground(new Color(255, 128, 128));
-        panel_1.add(separator, BorderLayout.SOUTH);
-
-        JButton btnBuscar = new JButton("Inicio");
-        btnBuscar.addActionListener(new ActionListener() {
+        txtBuscar.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 20));
+        txtBuscar.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(192, 192, 192))); // Borde blanco
+        txtBuscar.setBackground(new Color(30, 30, 90)); // Fondo no transparente
+        txtBuscar.setHorizontalAlignment(SwingConstants.LEFT);
+        txtBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Obtener el texto ingresado en el JTextField
+                String textoBusqueda = txtBuscar.getText().trim();
+                
+                // Realizar la búsqueda en la base de datos
+                buscarJuego(textoBusqueda);
             }
         });
-        btnBuscar.setBackground(new Color(255, 102, 102));
-        panel_1.add(btnBuscar, BorderLayout.EAST);
 
-        JPanel panelLogo = new JPanel(new GridBagLayout());
+        // Establecer tamaño específico para el JTextField
+        Dimension textFieldSize = txtBuscar.getPreferredSize();
+        textFieldSize.height = -10; // Modificar la altura a un valor más pequeño
+        txtBuscar.setPreferredSize(new Dimension(120, 0)); // Aplicar el nuevo tamaño
+
+        // Agregar un borde inferior al campo de texto
+        txtBuscar.setBorder(BorderFactory.createCompoundBorder(
+                txtBuscar.getBorder(), 
+                BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE)
+        ));
+
+        // Crear un panel para agregar un margen entre el panel superior y el JTextField
+        JPanel panelTextField = new JPanel(new BorderLayout());
+        panelTextField.setOpaque(false);
+        panelTextField.setBorder(new EmptyBorder(0, 0, 5, 0)); // Margen de 5px en la parte inferior del JTextField
+
+        panelTextField.add(txtBuscar, BorderLayout.CENTER); // Agregar el JTextField al panel con un margen inferior
+
+        panel_1.add(panelTextField, BorderLayout.WEST); // Agregar el panel con el JTextField al panel superior
+
+        // Utilizando un panel adicional para el logo con GridBagLayout para centrarlo
+        panelLogo = new JPanel(new GridBagLayout());
         panelLogo.setOpaque(false);
 
-        JLabel lblNewLabel_3 = new JLabel("");
-        lblNewLabel_3.setIcon(new ImageIcon(".\\.\\img\\logo_G3_Sin_Texto.PNG"));
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon(".\\.\\img\\logo_G3_Sin_Texto.PNG"));
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST; // Alineación a la izquierda
-        panelLogo.add(lblNewLabel_3, gbc);
-
-        // Ajuste de espacio a la izquierda del panel de la imagen
-        panelLogo.setBorder(BorderFactory.createEmptyBorder(0, -100, 0, 0)); // Se resta el espacio del JTextField
+        // Añadir el logo al centro del panel usando GridBagConstraints
+        GridBagConstraints gbcLogo = new GridBagConstraints();
+        gbcLogo.gridx = 0;
+        gbcLogo.gridy = 0;
+        gbcLogo.anchor = GridBagConstraints.CENTER;
+        panelLogo.add(lblNewLabel, gbcLogo);
 
         panel_1.add(panelLogo, BorderLayout.CENTER);
 
+        panelBotones = new JPanel();
+        panelBotones.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        panelBotones.setOpaque(false);
+        panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS)); // Layout vertical
+
+        // Agregar "glue" vertical al principio del panel para centrar los botones verticalmente
+        panelBotones.add(Box.createVerticalGlue());
+
+        JButton btnBuscar = new JButton("Inicio");
+        btnBuscar.setMargin(new Insets(0, 26, 0, 26));
+        btnBuscar.setAlignmentY(Component.TOP_ALIGNMENT);
+        btnBuscar.setBackground(new Color(255, 102, 102));
+        btnBuscar.setPreferredSize(new Dimension(100, 46)); // Establecer el tamaño del botón
+        btnBuscar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Acción del botón "Inicio"
+                restablecerVistaOriginal();
+            }
+        });
+        panelBotones.add(btnBuscar);
+
+        JButton btnBuscar_1 = new JButton("Biblioteca");
+        btnBuscar_1.setMargin(new Insets(2, 13, 2, 13));
+        btnBuscar_1.setBackground(new Color(255, 102, 102));
+        btnBuscar_1.setPreferredSize(new Dimension(100, 46)); // Establecer el tamaño del botón
+        panelBotones.add(btnBuscar_1);
+
+        panel_1.add(panelBotones, BorderLayout.EAST);
+
         return panel_1;
     }
-
-
-
 
     private JScrollPane crearPanelTabla() {
         panelTabla = new JPanel(new GridLayout(0, 5, 10, 10)); // GridLayout con 5 columnas y sin límite de filas
@@ -173,9 +217,65 @@ public class Juego extends JFrame {
         repaint();
     }
 
+    private void restablecerVistaOriginal() {
+        // Limpiar el panel de la tabla
+        panelTabla.removeAll();
 
+        // Volver a llenar la tabla con los datos originales de la base de datos
+        try {
+            Connection conn = ConexionBD.getConnection();
+            PreparedStatement stmt = conn.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO FROM JUEGO");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String rutaCaratula = rs.getString("CARATULA");
+                String nombreJuego = rs.getString("NOMBRE_JUEGO");
+                Float precio = rs.getFloat("PRECIO");
+                agregarJuego(rutaCaratula, nombreJuego, precio);
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-
+        // Actualizar la ventana para que se muestren los cambios
+        revalidate();
+        repaint();
+    }
+    private void buscarJuego(String textoBusqueda) {
+        // Limpiar el panel de la tabla
+        panelTabla.removeAll();
+        
+        try {
+            // Establecer la conexión a la base de datos
+            Connection conn = ConexionBD.getConnection();
+            
+            // Preparar la consulta SQL con un filtro de búsqueda por nombre de juego
+            String query = "SELECT CARATULA, NOMBRE_JUEGO, PRECIO FROM JUEGO WHERE NOMBRE_JUEGO LIKE ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, "%" + textoBusqueda + "%"); // Utilizar % para buscar coincidencias parciales
+            
+            // Ejecutar la consulta
+            ResultSet rs = stmt.executeQuery();
+            
+            // Iterar sobre los resultados de la consulta
+            while (rs.next()) {
+                String rutaCaratula = rs.getString("CARATULA");
+                String nombreJuego = rs.getString("NOMBRE_JUEGO");
+                Float precio = rs.getFloat("PRECIO");
+                agregarJuego(rutaCaratula, nombreJuego, precio);
+            }
+            
+            // Cerrar la conexión a la base de datos
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Actualizar la ventana para que se muestren los cambios
+        revalidate();
+        repaint();
+    }
+   
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Juego::new);
     }
