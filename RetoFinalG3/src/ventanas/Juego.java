@@ -115,6 +115,7 @@ public class Juego extends JFrame {
 		panel_1.add(panelLogo, BorderLayout.CENTER);
 
 		panelBotones = new JPanel();
+		panelBotones.setPreferredSize(new Dimension(120, 10));
 		panelBotones.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panelBotones.setOpaque(false);
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS)); // Layout vertical
@@ -124,10 +125,10 @@ public class Juego extends JFrame {
 		panelBotones.add(Box.createVerticalGlue());
 
 		JButton btnBuscar = new JButton("Inicio");
-		btnBuscar.setMargin(new Insets(5, 26, 5, 26));
+		btnBuscar.setMargin(new Insets(0, 34, 0, 34));
 		btnBuscar.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnBuscar.setBackground(new Color(255, 102, 102));
-		btnBuscar.setPreferredSize(new Dimension(80, 35)); // Establecer el tamaño del botón
+		btnBuscar.setPreferredSize(new Dimension(100, 35)); // Establecer el tamaño del botón
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Acción del botón "Inicio"
@@ -137,16 +138,16 @@ public class Juego extends JFrame {
 		panelBotones.add(btnBuscar);
 
 		JButton btnBuscar_2 = new JButton("Cerrar sesion");
-		btnBuscar_2.setPreferredSize(new Dimension(120, 36));
+		btnBuscar_2.setPreferredSize(new Dimension(100, 36));
 		btnBuscar_2.setMargin(new Insets(0, 10, 0, 10));
 		btnBuscar_2.setBackground(new Color(255, 102, 102));
 		btnBuscar_2.setAlignmentY(0.0f);
 		panelBotones.add(btnBuscar_2);
 
 		JButton btnBuscar_1 = new JButton("Biblioteca");
-		btnBuscar_1.setMargin(new Insets(9, 13, 9, 13));
+		btnBuscar_1.setMargin(new Insets(0, 21, 0, 21));
 		btnBuscar_1.setBackground(new Color(255, 102, 102));
-		btnBuscar_1.setPreferredSize(new Dimension(80, 35)); // Establecer el tamaño del botón
+		btnBuscar_1.setPreferredSize(new Dimension(100, 35)); // Establecer el tamaño del botón
 		panelBotones.add(btnBuscar_1);
 
 		panel_1.add(panelBotones, BorderLayout.EAST);
