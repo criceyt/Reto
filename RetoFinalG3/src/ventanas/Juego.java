@@ -17,10 +17,10 @@ public class Juego extends JFrame {
 	private InfoJuego infoJuego;
 
 	public Juego() {
-		 setTitle("Catálogo de Juegos");
-		    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		    setExtendedState(JFrame.MAXIMIZED_BOTH); // Hacer que la ventana se abra en pantalla completa
-		    setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+		setTitle("Catálogo de Juegos");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH); // Hacer que la ventana se abra en pantalla completa
+		setLocationRelativeTo(null); // Centrar la ventana en la pantalla
 
 		// Panel principal con diseño degradado
 		JPanel panel = new JPanel(new GridBagLayout()) {
@@ -124,10 +124,10 @@ public class Juego extends JFrame {
 		panelBotones.add(Box.createVerticalGlue());
 
 		JButton btnBuscar = new JButton("Inicio");
-		btnBuscar.setMargin(new Insets(0, 26, 0, 26));
+		btnBuscar.setMargin(new Insets(5, 26, 5, 26));
 		btnBuscar.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnBuscar.setBackground(new Color(255, 102, 102));
-		btnBuscar.setPreferredSize(new Dimension(100, 46)); // Establecer el tamaño del botón
+		btnBuscar.setPreferredSize(new Dimension(80, 35)); // Establecer el tamaño del botón
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Acción del botón "Inicio"
@@ -136,10 +136,17 @@ public class Juego extends JFrame {
 		});
 		panelBotones.add(btnBuscar);
 
+		JButton btnBuscar_2 = new JButton("Cerrar sesion");
+		btnBuscar_2.setPreferredSize(new Dimension(120, 36));
+		btnBuscar_2.setMargin(new Insets(0, 10, 0, 10));
+		btnBuscar_2.setBackground(new Color(255, 102, 102));
+		btnBuscar_2.setAlignmentY(0.0f);
+		panelBotones.add(btnBuscar_2);
+
 		JButton btnBuscar_1 = new JButton("Biblioteca");
-		btnBuscar_1.setMargin(new Insets(2, 13, 2, 13));
+		btnBuscar_1.setMargin(new Insets(9, 13, 9, 13));
 		btnBuscar_1.setBackground(new Color(255, 102, 102));
-		btnBuscar_1.setPreferredSize(new Dimension(100, 46)); // Establecer el tamaño del botón
+		btnBuscar_1.setPreferredSize(new Dimension(80, 35)); // Establecer el tamaño del botón
 		panelBotones.add(btnBuscar_1);
 
 		panel_1.add(panelBotones, BorderLayout.EAST);
@@ -181,7 +188,8 @@ public class Juego extends JFrame {
 		return scrollPane;
 	}
 
-	private void agregarJuego(JPanel nuevoPanelTabla, String rutaCaratula, String nombreJuego, double precio, String descripcion) {
+	private void agregarJuego(JPanel nuevoPanelTabla, String rutaCaratula, String nombreJuego, double precio,
+			String descripcion) {
 		// Crear panel para la carátula, el nombre del juego y el precio
 		JPanel panelJuego = new JPanel(new BorderLayout());
 		panelJuego.setOpaque(false);
@@ -235,71 +243,64 @@ public class Juego extends JFrame {
 		if (infoJuego == null) {
 			infoJuego = new InfoJuego();
 		}
-
-		// Llamar al método para actualizar la información del juego
-		// Pasar los datos del juego seleccionado a la ventana de información del juego
-		// Aquí deberías recuperar la información del juego de la base de datos
-		// y pasarla a la ventana InfoJuego
-		// Por ahora, solo pasamos el nombre del juego como ejemplo
 		infoJuego.actualizarInfoJuego(nombreJuego, rutaCaratula, descripcion, precio);
 		dispose();
 	}
 
 	void restablecerVistaOriginal() {
-	    // Limpiar el panel de la tabla antes de agregar los juegos originales
-	    panelTabla.removeAll();
+		// Limpiar el panel de la tabla antes de agregar los juegos originales
+		panelTabla.removeAll();
 
-	    try {
-	        Connection conn = ConexionBD.getConnection();
-	        PreparedStatement stmt = conn.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO");
-	        ResultSet rs = stmt.executeQuery();
-	        while (rs.next()) {
-	            String rutaCaratula = rs.getString("CARATULA");
-	            String nombreJuego = rs.getString("NOMBRE_JUEGO");
-	            String descripcion = rs.getString("DESCRIPCION");
-	            double precio = rs.getDouble("PRECIO");
-	            agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
-	        }
-	        conn.close();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			Connection conn = ConexionBD.getConnection();
+			PreparedStatement stmt = conn
+					.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String rutaCaratula = rs.getString("CARATULA");
+				String nombreJuego = rs.getString("NOMBRE_JUEGO");
+				String descripcion = rs.getString("DESCRIPCION");
+				double precio = rs.getDouble("PRECIO");
+				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    // Actualizar la ventana para que se muestren los cambios
-	    revalidate();
-	    repaint();
+		// Actualizar la ventana para que se muestren los cambios
+		revalidate();
+		repaint();
 	}
 
 	private void buscarJuego(String textoBusqueda) {
-	    // Limpiar el panel de la tabla antes de agregar nuevos resultados
-	    panelTabla.removeAll();
+		// Limpiar el panel de la tabla antes de agregar nuevos resultados
+		panelTabla.removeAll();
 
-	    try {
-	        Connection conn = ConexionBD.getConnection();
-	        String query = "SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO WHERE NOMBRE_JUEGO LIKE ?";
-	        PreparedStatement stmt = conn.prepareStatement(query);
-	        stmt.setString(1, "%" + textoBusqueda + "%");
-	        ResultSet rs = stmt.executeQuery();
+		try {
+			Connection conn = ConexionBD.getConnection();
+			String query = "SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO WHERE NOMBRE_JUEGO LIKE ?";
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setString(1, "%" + textoBusqueda + "%");
+			ResultSet rs = stmt.executeQuery();
 
-	        while (rs.next()) {
-	            String rutaCaratula = rs.getString("CARATULA");
-	            String nombreJuego = rs.getString("NOMBRE_JUEGO");
-	            String descripcion = rs.getString("DESCRIPCION");
-	            double precio = rs.getDouble("PRECIO");
-	            agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
-	        }
+			while (rs.next()) {
+				String rutaCaratula = rs.getString("CARATULA");
+				String nombreJuego = rs.getString("NOMBRE_JUEGO");
+				String descripcion = rs.getString("DESCRIPCION");
+				double precio = rs.getDouble("PRECIO");
+				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
+			}
 
-	        conn.close();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    // Actualizar la ventana para que se muestren los cambios
-	    revalidate();
-	    repaint();
+		// Actualizar la ventana para que se muestren los cambios
+		revalidate();
+		repaint();
 	}
-
-
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(Juego::new);

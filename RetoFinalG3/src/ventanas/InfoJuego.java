@@ -65,62 +65,68 @@ public class InfoJuego extends JFrame {
 	}
 
 	private JPanel crearPanelSuperior() {
-		JPanel panel_1 = new JPanel(new BorderLayout()); // Utilizando BorderLayout
-		panel_1.setBackground(new Color(30, 30, 90));
-		panel_1.setBorder(new EmptyBorder(0, 40, 0, 40)); // Margen vertical de 10px arriba y abajo, y margen lateral de
-															// 40px
+	    JPanel panel_1 = new JPanel(new BorderLayout());
+	    panel_1.setBackground(new Color(30, 30, 90));
+	    panel_1.setBorder(new EmptyBorder(0, 40, 0, 40)); // Margen vertical de 10px arriba y abajo, y margen lateral de
+	    // 40px
 
-		// Utilizando un panel adicional para el logo con GridBagLayout para centrarlo
-		JPanel panelLogo = new JPanel(new GridBagLayout());
-		panelLogo.setOpaque(false);
+	    // Utilizando un panel adicional para el logo con GridBagLayout para centrarlo
+	    JPanel panelLogo = new JPanel(new GridBagLayout());
+	    panelLogo.setOpaque(false);
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(".\\img\\logo_G3_Sin_Texto.PNG"));
+	    JLabel lblNewLabel = new JLabel("");
+	    lblNewLabel.setIcon(new ImageIcon(".\\img\\logo_G3_Sin_Texto.PNG"));
 
-		// Añadir el logo al centro del panel usando GridBagConstraints
-		GridBagConstraints gbcLogo = new GridBagConstraints();
-		gbcLogo.gridx = 0;
-		gbcLogo.gridy = 0;
-		gbcLogo.insets = new Insets(0, 220, 0, 0);
-		gbcLogo.anchor = GridBagConstraints.CENTER;
-		panelLogo.add(lblNewLabel, gbcLogo);
+	    // Añadir el logo al centro del panel usando GridBagConstraints
+	    GridBagConstraints gbcLogo = new GridBagConstraints();
+	    gbcLogo.gridx = 0;
+	    gbcLogo.gridy = 0;
+	    gbcLogo.insets = new Insets(0, 340, 0, 0);
+	    gbcLogo.anchor = GridBagConstraints.CENTER;
+	    panelLogo.add(lblNewLabel, gbcLogo);
 
-		panel_1.add(panelLogo, BorderLayout.CENTER);
+	    panel_1.add(panelLogo, BorderLayout.CENTER);
 
-		// Panel para los botones
-		JPanel panelBotones = new JPanel(); // Utilizando el layout por defecto (FlowLayout)
-		panelBotones.setOpaque(false);
+	    // Panel para los botones
+	    JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Utilizando el layout por defecto (FlowLayout) con alineación a la derecha
+	    panelBotones.setOpaque(false);
 
-		// Agregar "glue" vertical al principio del panel para centrar los botones
-		// verticalmente
-		panelBotones.add(Box.createVerticalGlue());
+	    // Agregar "glue" vertical al principio del panel para centrar los botones
+	    // verticalmente
+	    panelBotones.add(Box.createVerticalGlue());
 
-		JButton btnBuscar = new JButton("Inicio");
-		btnBuscar.setMargin(new Insets(0, 26, 0, 26));
-		btnBuscar.setAlignmentY(Component.TOP_ALIGNMENT);
-		btnBuscar.setBackground(new Color(255, 102, 102));
-		btnBuscar.setPreferredSize(new Dimension(100, 46)); // Establecer el tamaño del botón
-		btnBuscar.addActionListener(new ActionListener() {
-			 public void actionPerformed(ActionEvent e) {
-			        // Acción del botón "Inicio"
-			        Juego juego = new Juego();
-			        juego.setVisible(true);
-			        dispose(); 
-		    }
-		});
+	    JButton btnBuscar = new JButton("Inicio");
+	    btnBuscar.setMargin(new Insets(0, 26, 0, 26));
+	    btnBuscar.setAlignmentY(Component.TOP_ALIGNMENT);
+	    btnBuscar.setBackground(new Color(255, 102, 102));
+	    btnBuscar.setPreferredSize(new Dimension(100, 46)); // Establecer el tamaño del botón
+	    btnBuscar.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            // Acción del botón "Inicio"
+	            Juego juego = new Juego();
+	            juego.setVisible(true);
+	            dispose();
+	        }
+	    });
 
+	    JButton btnBuscar_1_1 = new JButton("Cerrar sesion");
+	    btnBuscar_1_1.setPreferredSize(new Dimension(120, 46));
+	    btnBuscar_1_1.setMargin(new Insets(2, 10, 2, 10));
+	    btnBuscar_1_1.setBackground(new Color(255, 102, 102));
+	    panelBotones.add(btnBuscar_1_1);
 
-		JButton btnBuscar_1 = new JButton("Biblioteca");
-		btnBuscar_1.setMargin(new Insets(2, 13, 2, 13));
-		btnBuscar_1.setBackground(new Color(255, 102, 102));
-		btnBuscar_1.setPreferredSize(new Dimension(100, 46)); // Establecer el tamaño del botón
-		panelBotones.add(btnBuscar_1);
-		panelBotones.add(btnBuscar);
+	    JButton btnBuscar_1 = new JButton("Biblioteca");
+	    btnBuscar_1.setMargin(new Insets(2, 13, 2, 13));
+	    btnBuscar_1.setBackground(new Color(255, 102, 102));
+	    btnBuscar_1.setPreferredSize(new Dimension(100, 46)); // Establecer el tamaño del botón
+	    panelBotones.add(btnBuscar_1);
+	    panelBotones.add(btnBuscar);
 
-		panel_1.add(panelBotones, BorderLayout.EAST);
+	    panel_1.add(panelBotones, BorderLayout.EAST);
 
-		return panel_1;
+	    return panel_1;
 	}
+
 
 	// Método para actualizar la información del juego
 	public void actualizarInfoJuego(String rutaCaratula, String titulo, String descripcion, double precio) {
