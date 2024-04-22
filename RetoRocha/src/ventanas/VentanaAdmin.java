@@ -20,6 +20,7 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
+import javax.swing.JTextArea;
 
 public class VentanaAdmin extends JDialog {
 
@@ -39,6 +40,9 @@ public class VentanaAdmin extends JDialog {
 	private JTextField textField_11;
 	private JTextField textField_12;
 	private JTextField textField_13;
+	private JTextField textField_14;
+	private JTextField textField_15;
+	private JTextField textField_16;
 
 	/**
 	 * Launch the application.
@@ -69,7 +73,7 @@ public class VentanaAdmin extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 160));
-		tabbedPane.addTab("GESTIÓN DE CLIENTES", null, panel, null);
+		tabbedPane.addTab("GESTIÓN DE CLIENTES  ", null, panel, null);
 		panel.setLayout(null);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -181,7 +185,67 @@ public class VentanaAdmin extends JDialog {
 		panel.add(textField_6);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setBackground(new Color(0, 0, 160));
 		tabbedPane.addTab("INSERTAR JUEGO", null, panel_2, null);
+		
+		JLabel lblNewLabel_2 = new JLabel("Descripcion:");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2.setBounds(242, 194, 89, 28);
+		panel_2.add(lblNewLabel_2);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		textArea.setBounds(242, 222, 318, 99);
+		panel_2.add(textArea);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Nombre: ");
+		lblNewLabel_2_1.setForeground(Color.WHITE);
+		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2_1.setBounds(351, 61, 89, 28);
+		panel_2.add(lblNewLabel_2_1);
+		
+		JLabel lblNewLabel_2_2 = new JLabel("Año:");
+		lblNewLabel_2_2.setForeground(Color.WHITE);
+		lblNewLabel_2_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2_2.setBounds(351, 100, 89, 28);
+		panel_2.add(lblNewLabel_2_2);
+		
+		JLabel lblNewLabel_2_3 = new JLabel("Precio:");
+		lblNewLabel_2_3.setForeground(Color.WHITE);
+		lblNewLabel_2_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_2_3.setBounds(351, 139, 89, 28);
+		panel_2.add(lblNewLabel_2_3);
+		
+		textField_14 = new JTextField();
+		textField_14.setColumns(10);
+		textField_14.setBounds(425, 67, 152, 20);
+		panel_2.add(textField_14);
+		
+		textField_15 = new JTextField();
+		textField_15.setColumns(10);
+		textField_15.setBounds(425, 106, 152, 20);
+		panel_2.add(textField_15);
+		
+		textField_16 = new JTextField();
+		textField_16.setColumns(10);
+		textField_16.setBounds(425, 145, 152, 20);
+		panel_2.add(textField_16);
+		
+		JButton enviarButton_1_1 = new JButton("Limpiar");
+		enviarButton_1_1.setBackground(new Color(255, 102, 102));
+		enviarButton_1_1.setBounds(603, 223, 154, 35);
+		panel_2.add(enviarButton_1_1);
+		
+		JButton enviarButton_2 = new JButton("Insertar Juego");
+		enviarButton_2.setBackground(new Color(255, 102, 102));
+		enviarButton_2.setBounds(603, 284, 154, 35);
+		panel_2.add(enviarButton_2);
+		
+		JLabel lblImagen = new JLabel("");
+		lblImagen.setBounds(85, 70, 118, 97);
+		panel_2.add(lblImagen);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(0, 0, 160));
