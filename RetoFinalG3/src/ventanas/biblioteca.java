@@ -73,15 +73,14 @@ public class Biblioteca extends JFrame {
 		txtBuscar.setBackground(new Color(30, 30, 90)); // Fondo no transparente
 		txtBuscar.setHorizontalAlignment(SwingConstants.LEFT);
 		txtBuscar.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        // Obtener el texto ingresado en el JTextField
-		        String textoBusqueda = txtBuscar.getText().trim();
+			public void actionPerformed(ActionEvent e) {
+				// Obtener el texto ingresado en el JTextField
+				String textoBusqueda = txtBuscar.getText().trim();
 
-		        // Realizar la búsqueda con el texto ingresado
-		        buscarJuego(textoBusqueda); // Llamar al método para buscar juegos
-		    }
+				// Realizar la búsqueda con el texto ingresado
+				buscarJuego(textoBusqueda); // Llamar al método para buscar juegos
+			}
 		});
-		
 
 		// Establecer tamaño específico para el JTextField
 		Dimension textFieldSize = txtBuscar.getPreferredSize();
@@ -134,13 +133,13 @@ public class Biblioteca extends JFrame {
 		btnBuscar.setBackground(new Color(255, 102, 102));
 		btnBuscar.setPreferredSize(new Dimension(100, 50)); // Establecer el tamaño del botón
 		btnBuscar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Crear una nueva instancia de la clase Juego
-                Juego ventanaJuego = new Juego(usuarioDNI);  
-                ventanaJuego.setVisible(true);  // Hacer visible la ventana Juego
-                dispose();  // Cerrar la ventana actual
-            }
-        });
+			public void actionPerformed(ActionEvent e) {
+				// Crear una nueva instancia de la clase Juego
+				Juego ventanaJuego = new Juego(usuarioDNI);
+				ventanaJuego.setVisible(true); // Hacer visible la ventana Juego
+				dispose(); // Cerrar la ventana actual
+			}
+		});
 		panelBotones.add(btnBuscar);
 
 		JButton btnBuscar_2 = new JButton("Cerrar sesion");
@@ -179,7 +178,7 @@ public class Biblioteca extends JFrame {
 				String descripcion = rs.getString("DESCRIPCION");
 				double precio = rs.getDouble("PRECIO");
 
-				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
+				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion, usuarioDNI);
 			}
 
 			conn.close();
@@ -200,7 +199,7 @@ public class Biblioteca extends JFrame {
 	}
 
 	private void agregarJuego(JPanel nuevoPanelTabla, String rutaCaratula, String nombreJuego, double precio,
-			String descripcion) {
+			String descripcion, String usuarioDNI) {
 		// Crear panel para la carátula, el nombre del juego y el precio
 		JPanel panelJuego = new JPanel(new BorderLayout());
 		panelJuego.setOpaque(false);
@@ -214,8 +213,9 @@ public class Biblioteca extends JFrame {
 		btnCaratula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Acción al hacer clic en la carátula del juego
-				abrirVentanaJuego(rutaCaratula, nombreJuego, descripcion, precio); // Abre la ventana correspondiente al
-																					// juego seleccionado
+				abrirVentanaJuego(rutaCaratula, nombreJuego, descripcion, precio, usuarioDNI); // Abre la ventana
+																								// correspondiente al
+				// juego seleccionado
 			}
 		});
 		panelJuego.add(btnCaratula, BorderLayout.CENTER);
@@ -249,73 +249,100 @@ public class Biblioteca extends JFrame {
 		repaint();
 	}
 
-	private void abrirVentanaJuego(String nombreJuego, String rutaCaratula, String descripcion, double precio) {
+	private void abrirVentanaJuego(String nombreJuego, String rutaCaratula, String descripcion, double precio,
+			String usuarioDNI) {
 		if (infoJuego == null) {
 			infoJuego = new InfoJuego(); // Crear o reutilizar la ventana de información
 		}
-		infoJuego.actualizarInfoJuego(nombreJuego, rutaCaratula, descripcion, precio);
+		infoJuego.actualizarInfoJuego(nombreJuego, rutaCaratula, descripcion, precio, usuarioDNI);
 		infoJuego.setVisible(true); // Mostrar la nueva ventana
 	}
 
-	
+	void restablecerVistaOriginal() {
+		// Limpiar el panel de la tabla antes de agregar los juegos originales
+		panelTabla.removeAll();
 
-	private void buscarJuego(String textoBusqueda) {
-	    panelTabla.removeAll();  // Limpia la tabla para evitar superposiciones
+		try {
+			Connection conn = ConexionBD.getConnection();
+			PreparedStatement stmt = conn
+					.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String rutaCaratula = rs.getString("CARATULA");
+				String nombreJuego = rs.getString("NOMBRE_JUEGO");
+				String descripcion = rs.getString("DESCRIPCION");
+				double precio = rs.getDouble("PRECIO");
+				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion, usuarioDNI);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    String consultaSQL = 
-	        "SELECT J.CARATULA, J.NOMBRE_JUEGO, J.PRECIO, J.DESCRIPCION " +
-	        "FROM JUEGO J " +
-	        "INNER JOIN VENTA V ON J.COD_JUEGO = V.COD_JUEGO " +
-	        "WHERE V.DNI = ?";  // Consulta base
-
-	    if (!textoBusqueda.isEmpty()) {
-	        consultaSQL += " AND (J.NOMBRE_JUEGO LIKE ? OR J.DESCRIPCION LIKE ?)";
-	    }
-
-	    try {
-	        Connection conn = ConexionBD.getConnection();  // Obtener conexión
-	        PreparedStatement ps = conn.prepareStatement(consultaSQL);  // Preparar la consulta
-	        ps.setString(1, usuarioDNI);  // Primer parámetro como el DNI del usuario
-	        
-	        if (!textoBusqueda.isEmpty()) {
-	            String busquedaLike = "%" + textoBusqueda + "%";
-	            ps.setString(2, busquedaLike);  // Para el nombre del juego
-	            ps.setString(3, busquedaLike);  // Para la descripción del juego
-	        }
-
-	        ResultSet rs = ps.executeQuery();  // Ejecutar la consulta
-	        
-	        boolean resultadosEncontrados = false;  // Bandera para verificar si hay resultados
-	        
-	        while (rs.next()) {
-	            resultadosEncontrados = true;  // Si entramos en el bucle, hay resultados
-	            
-	            // Obtener datos del juego y agregar a la interfaz
-	            String caratula = rs.getString("CARATULA");
-	            String nombreJuego = rs.getString("NOMBRE_JUEGO");
-	            double precio = rs.getDouble("PRECIO");
-	            String descripcion = rs.getString("DESCRIPCION");
-	            
-	            agregarJuego(panelTabla, caratula, nombreJuego, precio, descripcion); // Lógica para agregar a la tabla
-	        }
-
-	        if (!resultadosEncontrados) {
-	            // Si no se encuentran resultados, mostrar mensaje o indicar que no hay juegos
-	            JLabel lblSinResultados = new JLabel("No se encontraron resultados.");
-	            panelTabla.add(lblSinResultados); // Agregar a la tabla
-	        }
-
-	        rs.close();
-	        ps.close();
-	        conn.close();
-
-	    } catch (SQLException ex) {
-	        ex.printStackTrace();  // Imprimir el error para depuración
-	    }
-
-	    panelTabla.revalidate();  // Asegúrate de que la tabla se revalide después de la operación
-	    panelTabla.repaint();  // Re-pintar para reflejar cambios
+		// Actualizar la ventana para que se muestren los cambios
+		revalidate();
+		repaint();
 	}
 
+
+
+	private void buscarJuego(String textoBusqueda) {
+		panelTabla.removeAll(); // Limpia la tabla para evitar superposiciones
+
+		String consultaSQL = "SELECT J.CARATULA, J.NOMBRE_JUEGO, J.PRECIO, J.DESCRIPCION " + "FROM JUEGO J "
+				+ "INNER JOIN VENTA V ON J.COD_JUEGO = V.COD_JUEGO " + "WHERE V.DNI = ?"; // Consulta base
+
+		if (!textoBusqueda.isEmpty()) {
+			consultaSQL += " AND (J.NOMBRE_JUEGO LIKE ? OR J.DESCRIPCION LIKE ?)";
+		}
+
+		try {
+			Connection conn = ConexionBD.getConnection(); // Obtener conexión
+			PreparedStatement ps = conn.prepareStatement(consultaSQL); // Preparar la consulta
+			ps.setString(1, usuarioDNI); // Primer parámetro como el DNI del usuario
+
+			if (!textoBusqueda.isEmpty()) {
+				String busquedaLike = "%" + textoBusqueda + "%";
+				ps.setString(2, busquedaLike); // Para el nombre del juego
+				ps.setString(3, busquedaLike); // Para la descripción del juego
+			}
+
+			ResultSet rs = ps.executeQuery(); // Ejecutar la consulta
+
+			boolean resultadosEncontrados = false; // Bandera para verificar si hay resultados
+
+			while (rs.next()) {
+				resultadosEncontrados = true; // Si entramos en el bucle, hay resultados
+
+				// Obtener datos del juego y agregar a la interfaz
+				String caratula = rs.getString("CARATULA");
+				String nombreJuego = rs.getString("NOMBRE_JUEGO");
+				double precio = rs.getDouble("PRECIO");
+				String descripcion = rs.getString("DESCRIPCION");
+
+				agregarJuego(panelTabla, caratula, nombreJuego, precio, descripcion, usuarioDNI); // Lógica
+																									// para
+																									// agregar
+																									// a la
+																									// tabla
+			}
+
+			if (!resultadosEncontrados) {
+				// Si no se encuentran resultados, mostrar mensaje o indicar que no hay juegos
+				JLabel lblSinResultados = new JLabel("No se encontraron resultados.");
+				panelTabla.add(lblSinResultados); // Agregar a la tabla
+			}
+
+			rs.close();
+			ps.close();
+			conn.close();
+
+		} catch (SQLException ex) {
+			ex.printStackTrace(); // Imprimir el error para depuración
+		}
+
+		panelTabla.revalidate(); // Asegúrate de que la tabla se revalide después de la operación
+		panelTabla.repaint(); // Re-pintar para reflejar cambios
+	}
 
 }

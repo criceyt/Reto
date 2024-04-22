@@ -17,14 +17,13 @@ public class Juego extends JFrame {
 	private InfoJuego infoJuego;
 	private String usuarioDNI; // Almacena el DNI del usuario
 
-
 	public Juego(String usuarioDNI) {
-	    this.usuarioDNI = usuarioDNI; // Guardar el usuarioDNI para uso posterior
-	    // Configurar la ventana
-	    setTitle("Catálogo de Juegos");
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setExtendedState(JFrame.MAXIMIZED_BOTH);
-	    setLocationRelativeTo(null);
+		this.usuarioDNI = usuarioDNI; // Guardar el usuarioDNI para uso posterior
+		// Configurar la ventana
+		setTitle("Catálogo de Juegos");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setLocationRelativeTo(null);
 
 		// Panel principal con diseño degradado
 		JPanel panel = new JPanel(new GridBagLayout()) {
@@ -39,7 +38,7 @@ public class Juego extends JFrame {
 		};
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(panel, BorderLayout.CENTER);
-		  setVisible(true);
+		setVisible(true);
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -158,12 +157,12 @@ public class Juego extends JFrame {
 		btnBuscar_1.setBackground(new Color(255, 102, 102));
 		btnBuscar_1.setPreferredSize(new Dimension(100, 35)); // Establecer el tamaño del botón
 		btnBuscar_1.addActionListener(new ActionListener() {
-		        public void actionPerformed(ActionEvent e) {
-		            Biblioteca biblioteca = new Biblioteca(usuarioDNI); // Pasar el usuarioDNI a la ventana Biblioteca
-		            biblioteca.setVisible(true); // Mostrar la ventana de biblioteca
-		            dispose(); // Cerrar la ventana actual
-		        }
-		    });
+			public void actionPerformed(ActionEvent e) {
+				Biblioteca biblioteca = new Biblioteca(usuarioDNI); // Pasar el usuarioDNI a la ventana Biblioteca
+				biblioteca.setVisible(true); // Mostrar la ventana de biblioteca
+				dispose(); // Cerrar la ventana actual
+			}
+		});
 
 		panelBotones.add(btnBuscar_1);
 
@@ -255,14 +254,13 @@ public class Juego extends JFrame {
 		revalidate();
 		repaint();
 	}
-	
 
 	// Evitar cerrar la ventana actual
 	private void abrirVentanaJuego(String rutaCaratula, String nombreJuego, double precio, String descripcion) {
 		if (infoJuego == null) {
 			infoJuego = new InfoJuego(); // Crear o reutilizar la ventana de información
 		}
-		infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, descripcion, precio);
+		infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, descripcion, precio, usuarioDNI);
 		infoJuego.setVisible(true); // Mostrar la nueva ventana
 	}
 
