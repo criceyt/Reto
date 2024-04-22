@@ -42,6 +42,8 @@ public class VentanasTrabajador extends JDialog {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
+	private JTextField textField_10;
+	private JTextField textField_11;
 
 	/**
 	 * Launch the application.
@@ -153,7 +155,7 @@ public class VentanasTrabajador extends JDialog {
 		chckbxNewCheckBox.setForeground(UIManager.getColor("Button.background"));
 		chckbxNewCheckBox.setFont(new Font("Arial Black", Font.PLAIN, 14));
 		chckbxNewCheckBox.setBackground(new Color(0, 0, 160));
-		chckbxNewCheckBox.setBounds(373, 177, 165, 21);
+		chckbxNewCheckBox.setBounds(538, 255, 165, 21);
 		panel.add(chckbxNewCheckBox);
 		
 		textField_4 = new JTextField();
@@ -185,6 +187,34 @@ public class VentanasTrabajador extends JDialog {
 		textField_9.setColumns(10);
 		textField_9.setBounds(480, 133, 224, 25);
 		panel.add(textField_9);
+		
+		JLabel lblEmail_1_1 = new JLabel("Contraseña:");
+		lblEmail_1_1.setForeground(UIManager.getColor("Button.background"));
+		lblEmail_1_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEmail_1_1.setBounds(373, 168, 97, 35);
+		panel.add(lblEmail_1_1);
+		
+		JLabel lblApellido_1_1 = new JLabel("Confirma");
+		lblApellido_1_1.setForeground(UIManager.getColor("Button.background"));
+		lblApellido_1_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblApellido_1_1.setBounds(373, 210, 97, 35);
+		panel.add(lblApellido_1_1);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(480, 178, 224, 25);
+		panel.add(textField_10);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(480, 223, 224, 25);
+		panel.add(textField_11);
+		
+		JLabel lblApellido_1_1_1 = new JLabel("contraseña:");
+		lblApellido_1_1_1.setForeground(UIManager.getColor("Button.background"));
+		lblApellido_1_1_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblApellido_1_1_1.setBounds(373, 225, 97, 35);
+		panel.add(lblApellido_1_1_1);
 		
 		tabbedPane.addTab("STOCK", null, panel_1, null);
 		panel_1.setLayout(null);
