@@ -103,8 +103,8 @@ public class InfoJuego extends JFrame {
 	    btnBuscar.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
 	            // Acción del botón "Inicio"
-	            Juego juego = new Juego();
-	            juego.setVisible(true);
+	           
+	            
 	            dispose();
 	        }
 	    });

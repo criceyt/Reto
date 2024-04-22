@@ -17,15 +17,14 @@ public class Juego extends JFrame {
 	private InfoJuego infoJuego;
 	private String usuarioDNI; // Almacena el DNI del usuario
 
-	
-	     
-	
-	public Juego(String dni) {
-		setTitle("Catálogo de Juegos");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH); // Hacer que la ventana se abra en pantalla completa
-		setLocationRelativeTo(null); // Centrar la ventana en la pantalla
-		this.usuarioDNI = dni;
+
+	public Juego(String usuarioDNI) {
+	    this.usuarioDNI = usuarioDNI; // Guardar el usuarioDNI para uso posterior
+	    // Configurar la ventana
+	    setTitle("Catálogo de Juegos");
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    setLocationRelativeTo(null);
 
 		// Panel principal con diseño degradado
 		JPanel panel = new JPanel(new GridBagLayout()) {
@@ -40,6 +39,7 @@ public class Juego extends JFrame {
 		};
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(panel, BorderLayout.CENTER);
+		  setVisible(true);
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -59,6 +59,10 @@ public class Juego extends JFrame {
 		panel.add(crearPanelTabla(), gbcTabla);
 
 		setVisible(true);
+	}
+
+	public Juego() {
+		// TODO Auto-generated constructor stub
 	}
 
 	private JPanel crearPanelSuperior() {
@@ -154,12 +158,13 @@ public class Juego extends JFrame {
 		btnBuscar_1.setBackground(new Color(255, 102, 102));
 		btnBuscar_1.setPreferredSize(new Dimension(100, 35)); // Establecer el tamaño del botón
 		btnBuscar_1.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        dispose(); // Cerrar la ventana actual (Juego)
-		        biblioteca biblioteca = new biblioteca(usuarioDNI); // Pasar el DNI al constructor
-		        biblioteca.setVisible(true); // Mostrar la ventana de "biblioteca"
-		    }
-		});
+		        public void actionPerformed(ActionEvent e) {
+		            Biblioteca biblioteca = new Biblioteca(usuarioDNI); // Pasar el usuarioDNI a la ventana Biblioteca
+		            biblioteca.setVisible(true); // Mostrar la ventana de biblioteca
+		            dispose(); // Cerrar la ventana actual
+		        }
+		    });
+
 		panelBotones.add(btnBuscar_1);
 
 		panel_1.add(panelBotones, BorderLayout.EAST);
@@ -250,16 +255,16 @@ public class Juego extends JFrame {
 		revalidate();
 		repaint();
 	}
+	
 
 	// Evitar cerrar la ventana actual
 	private void abrirVentanaJuego(String rutaCaratula, String nombreJuego, double precio, String descripcion) {
-	    if (infoJuego == null) {
-	        infoJuego = new InfoJuego(); // Crear o reutilizar la ventana de información
-	    }
-	    infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, descripcion, precio);
-	    infoJuego.setVisible(true); // Mostrar la nueva ventana
+		if (infoJuego == null) {
+			infoJuego = new InfoJuego(); // Crear o reutilizar la ventana de información
+		}
+		infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, descripcion, precio);
+		infoJuego.setVisible(true); // Mostrar la nueva ventana
 	}
-
 
 	void restablecerVistaOriginal() {
 		// Limpiar el panel de la tabla antes de agregar los juegos originales
@@ -288,29 +293,28 @@ public class Juego extends JFrame {
 	}
 
 	private void buscarJuego(String textoBusqueda) {
-	    panelTabla.removeAll(); // Limpiar el panel antes de agregar nuevos resultados
+		panelTabla.removeAll(); // Limpiar el panel antes de agregar nuevos resultados
 
-	    try (Connection conn = ConexionBD.getConnection();
-	         PreparedStatement stmt = conn.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO WHERE NOMBRE_JUEGO LIKE ?")) {
+		try (Connection conn = ConexionBD.getConnection();
+				PreparedStatement stmt = conn.prepareStatement(
+						"SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO WHERE NOMBRE_JUEGO LIKE ?")) {
 
-	        stmt.setString(1, "%" + textoBusqueda + "%");
-	        ResultSet rs = stmt.executeQuery();
+			stmt.setString(1, "%" + textoBusqueda + "%");
+			ResultSet rs = stmt.executeQuery();
 
-	        while (rs.next()) {
-	            String rutaCaratula = rs.getString("CARATULA");
-	            String nombreJuego = rs.getString("NOMBRE_JUEGO");
-	            String descripcion = rs.getString("DESCRIPCION");
-	            double precio = rs.getDouble("PRECIO");
-	            agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+			while (rs.next()) {
+				String rutaCaratula = rs.getString("CARATULA");
+				String nombreJuego = rs.getString("NOMBRE_JUEGO");
+				String descripcion = rs.getString("DESCRIPCION");
+				double precio = rs.getDouble("PRECIO");
+				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-	    revalidate();
-	    repaint(); // Actualizar la interfaz después de cambios
+		revalidate();
+		repaint(); // Actualizar la interfaz después de cambios
 	}
-
-
 
 }
