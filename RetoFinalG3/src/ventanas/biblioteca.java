@@ -8,24 +8,26 @@ import java.sql.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-public class Juego extends JFrame {
+public class biblioteca extends JFrame {
 	private JTextField txtBuscar;
 	private JPanel panelTabla;
 	private JScrollPane scrollPane;
 	private JPanel panelBotones;
 	private JPanel panelLogo;
 	private InfoJuego infoJuego;
-	private String usuarioDNI; // Almacena el DNI del usuario
+	 private String usuarioDNI;  // Almacena el DNI del usuario
+	    // Otros atributos...
 
-	
-	     
-	
-	public Juego(String dni) {
+	    public biblioteca(String dni) {
+	        this.usuarioDNI = dni;  // Guarda el DNI del usuario
+	        
+	}
+
+	public biblioteca() {
 		setTitle("Catálogo de Juegos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); // Hacer que la ventana se abra en pantalla completa
 		setLocationRelativeTo(null); // Centrar la ventana en la pantalla
-		this.usuarioDNI = dni;
 
 		// Panel principal con diseño degradado
 		JPanel panel = new JPanel(new GridBagLayout()) {
@@ -80,7 +82,7 @@ public class Juego extends JFrame {
 				String textoBusqueda = txtBuscar.getText().trim();
 
 				// Realizar la búsqueda en la base de datos
-				buscarJuego(textoBusqueda);
+				buscarJuego(textoBusqueda, textoBusqueda);
 			}
 		});
 
@@ -153,13 +155,6 @@ public class Juego extends JFrame {
 		btnBuscar_1.setMargin(new Insets(0, 21, 0, 21));
 		btnBuscar_1.setBackground(new Color(255, 102, 102));
 		btnBuscar_1.setPreferredSize(new Dimension(100, 35)); // Establecer el tamaño del botón
-		btnBuscar_1.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        dispose(); // Cerrar la ventana actual (Juego)
-		        biblioteca biblioteca = new biblioteca(usuarioDNI); // Pasar el DNI al constructor
-		        biblioteca.setVisible(true); // Mostrar la ventana de "biblioteca"
-		    }
-		});
 		panelBotones.add(btnBuscar_1);
 
 		panel_1.add(panelBotones, BorderLayout.EAST);
@@ -175,7 +170,7 @@ public class Juego extends JFrame {
 		try {
 			Connection conn = ConexionBD.getConnection();
 			PreparedStatement stmt = conn
-					.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO");
+					.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO ");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				String rutaCaratula = rs.getString("CARATULA");
@@ -251,15 +246,14 @@ public class Juego extends JFrame {
 		repaint();
 	}
 
-	// Evitar cerrar la ventana actual
-	private void abrirVentanaJuego(String rutaCaratula, String nombreJuego, double precio, String descripcion) {
-	    if (infoJuego == null) {
-	        infoJuego = new InfoJuego(); // Crear o reutilizar la ventana de información
-	    }
-	    infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, descripcion, precio);
-	    infoJuego.setVisible(true); // Mostrar la nueva ventana
+	private void abrirVentanaJuego(String nombreJuego, String rutaCaratula, double precio, String descripcion) {
+		// Crear o mostrar la ventana de información del juego
+		if (infoJuego == null) {
+			infoJuego = new InfoJuego();
+		}
+		infoJuego.actualizarInfoJuego(nombreJuego, rutaCaratula, descripcion, precio);
+		dispose();
 	}
-
 
 	void restablecerVistaOriginal() {
 		// Limpiar el panel de la tabla antes de agregar los juegos originales
@@ -287,13 +281,22 @@ public class Juego extends JFrame {
 		repaint();
 	}
 
-	private void buscarJuego(String textoBusqueda) {
-	    panelTabla.removeAll(); // Limpiar el panel antes de agregar nuevos resultados
+	private void buscarJuego(String textoBusqueda, String dniUsuario) {
+	    panelTabla.removeAll();  // Limpia la tabla antes de agregar nuevos resultados.
 
-	    try (Connection conn = ConexionBD.getConnection();
-	         PreparedStatement stmt = conn.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO WHERE NOMBRE_JUEGO LIKE ?")) {
+	    try {
+	        Connection conn = ConexionBD.getConnection();
+	        
+	        // La consulta para buscar juegos por nombre y por el DNI del cliente en la tabla VENTA.
+	        String query = "SELECT J.CARATULA, J.NOMBRE_JUEGO, J.PRECIO, J.DESCRIPCION " +
+	                       "FROM JUEGO J " +
+	                       "INNER JOIN VENTA V ON J.COD_JUEGO = V.COD_JUEGO " +
+	                       "WHERE V.DNI = ? AND J.NOMBRE_JUEGO LIKE ?";
 
-	        stmt.setString(1, "%" + textoBusqueda + "%");
+	        PreparedStatement stmt = conn.prepareStatement(query);
+	        stmt.setString(1, dniUsuario);  // Filtra por el DNI del usuario logueado.
+	        stmt.setString(2, "%" + textoBusqueda + "%");  // Filtra por el nombre del juego.
+
 	        ResultSet rs = stmt.executeQuery();
 
 	        while (rs.next()) {
@@ -301,16 +304,21 @@ public class Juego extends JFrame {
 	            String nombreJuego = rs.getString("NOMBRE_JUEGO");
 	            String descripcion = rs.getString("DESCRIPCION");
 	            double precio = rs.getDouble("PRECIO");
+	            
 	            agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
 	        }
+
+	        conn.close();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
 
-	    revalidate();
-	    repaint(); // Actualizar la interfaz después de cambios
+	    revalidate();  // Actualiza la ventana para mostrar los cambios.
+	    repaint();
 	}
 
 
-
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(biblioteca::new);
+	}
 }
