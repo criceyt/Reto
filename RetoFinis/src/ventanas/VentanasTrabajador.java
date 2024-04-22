@@ -25,8 +25,9 @@ import java.io.File;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
 
-public class VentanaInsert extends JDialog {
+public class VentanasTrabajador extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -34,13 +35,20 @@ public class VentanaInsert extends JDialog {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JLabel lblImagen;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			VentanaInsert dialog = new VentanaInsert();
+			VentanasTrabajador dialog = new VentanasTrabajador();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -51,7 +59,7 @@ public class VentanaInsert extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public VentanaInsert() {
+	public VentanasTrabajador() {
 		setBounds(100, 100, 807, 412);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,7 +74,117 @@ public class VentanaInsert extends JDialog {
 		contentPanel.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
-		tabbedPane.addTab("GESTIÓN DE CLIENTES", null, panel, null);
+		panel.setLayout(null);
+		panel.setBackground(new Color(0, 0, 160));
+		tabbedPane.addTab("GESTION DE CLIENTES", null, panel, null);
+		
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setForeground(UIManager.getColor("Button.background"));
+		lblEmail.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEmail.setBounds(45, 10, 60, 35);
+		panel.add(lblEmail);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(115, 17, 297, 25);
+		panel.add(textField_3);
+		
+		JButton btnComprobar = new JButton("Comprobar");
+		btnComprobar.setFont(new Font("Arial", Font.PLAIN, 18));
+		btnComprobar.setBackground(new Color(255, 102, 102));
+		btnComprobar.setBounds(433, 17, 133, 28);
+		panel.add(btnComprobar);
+		
+		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnGuardar.setBackground(new Color(255, 102, 102));
+		btnGuardar.setBounds(622, 301, 154, 35);
+		panel.add(btnGuardar);
+		
+		JButton btnBorrarDatos = new JButton("Borrar datos");
+		btnBorrarDatos.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnBorrarDatos.setBackground(new Color(255, 102, 102));
+		btnBorrarDatos.setBounds(447, 301, 154, 35);
+		panel.add(btnBorrarDatos);
+		
+		JButton btnDarDeBaja = new JButton("Dar de baja");
+		btnDarDeBaja.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnDarDeBaja.setBackground(new Color(255, 102, 102));
+		btnDarDeBaja.setBounds(272, 301, 154, 35);
+		panel.add(btnDarDeBaja);
+		
+		JLabel lblDni = new JLabel("DNI:");
+		lblDni.setForeground(UIManager.getColor("Button.background"));
+		lblDni.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblDni.setBounds(45, 73, 115, 35);
+		panel.add(lblDni);
+		
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setForeground(UIManager.getColor("Button.background"));
+		lblNombre.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblNombre.setBounds(45, 123, 97, 35);
+		panel.add(lblNombre);
+		
+		JLabel lblApellido = new JLabel("Apellido:");
+		lblApellido.setForeground(UIManager.getColor("Button.background"));
+		lblApellido.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblApellido.setBounds(45, 168, 97, 35);
+		panel.add(lblApellido);
+		
+		JLabel lblEdad = new JLabel("Edad:");
+		lblEdad.setForeground(UIManager.getColor("Button.background"));
+		lblEdad.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEdad.setBounds(45, 213, 97, 35);
+		panel.add(lblEdad);
+		
+		JLabel lblEmail_1 = new JLabel("Email:");
+		lblEmail_1.setForeground(UIManager.getColor("Button.background"));
+		lblEmail_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEmail_1.setBounds(373, 73, 97, 35);
+		panel.add(lblEmail_1);
+		
+		JLabel lblApellido_1 = new JLabel("Dirección:");
+		lblApellido_1.setForeground(UIManager.getColor("Button.background"));
+		lblApellido_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblApellido_1.setBounds(373, 123, 97, 35);
+		panel.add(lblApellido_1);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Usuario premium");
+		chckbxNewCheckBox.setForeground(UIManager.getColor("Button.background"));
+		chckbxNewCheckBox.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		chckbxNewCheckBox.setBackground(new Color(0, 0, 160));
+		chckbxNewCheckBox.setBounds(373, 177, 165, 21);
+		panel.add(chckbxNewCheckBox);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(125, 80, 224, 25);
+		panel.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(125, 130, 224, 25);
+		panel.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(125, 175, 224, 25);
+		panel.add(textField_6);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(125, 220, 224, 25);
+		panel.add(textField_7);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(480, 83, 224, 25);
+		panel.add(textField_8);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(480, 133, 224, 25);
+		panel.add(textField_9);
 		
 		tabbedPane.addTab("STOCK", null, panel_1, null);
 		panel_1.setLayout(null);
