@@ -43,6 +43,8 @@ public class VentanaAdmin extends JDialog {
 	private JTextField textField_14;
 	private JTextField textField_15;
 	private JTextField textField_16;
+	private JTextField textField_17;
+	private JTextField textField_18;
 
 	/**
 	 * Launch the application.
@@ -151,7 +153,7 @@ public class VentanaAdmin extends JDialog {
 		chckbxNewCheckBox.setFont(new Font("Arial Black", Font.PLAIN, 14));
 		chckbxNewCheckBox.setForeground(new Color(240, 240, 240));
 		chckbxNewCheckBox.setBackground(new Color(0, 0, 160));
-		chckbxNewCheckBox.setBounds(373, 177, 165, 21);
+		chckbxNewCheckBox.setBounds(539, 259, 165, 21);
 		panel.add(chckbxNewCheckBox);
 		
 		textField_1 = new JTextField();
@@ -183,6 +185,34 @@ public class VentanaAdmin extends JDialog {
 		textField_6.setColumns(10);
 		textField_6.setBounds(480, 133, 224, 25);
 		panel.add(textField_6);
+		
+		textField_17 = new JTextField();
+		textField_17.setColumns(10);
+		textField_17.setBounds(480, 220, 224, 25);
+		panel.add(textField_17);
+		
+		JLabel lblApellido_1_2 = new JLabel("Confirma");
+		lblApellido_1_2.setForeground(UIManager.getColor("Button.background"));
+		lblApellido_1_2.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblApellido_1_2.setBounds(373, 201, 97, 35);
+		panel.add(lblApellido_1_2);
+		
+		JLabel lblEmail_1_2 = new JLabel("Contraseña:");
+		lblEmail_1_2.setForeground(UIManager.getColor("Button.background"));
+		lblEmail_1_2.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEmail_1_2.setBounds(373, 168, 97, 35);
+		panel.add(lblEmail_1_2);
+		
+		textField_18 = new JTextField();
+		textField_18.setColumns(10);
+		textField_18.setBounds(480, 178, 224, 25);
+		panel.add(textField_18);
+		
+		JLabel lblApellido_1_2_1 = new JLabel("contraseña:");
+		lblApellido_1_2_1.setForeground(UIManager.getColor("Button.background"));
+		lblApellido_1_2_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblApellido_1_2_1.setBounds(373, 216, 97, 35);
+		panel.add(lblApellido_1_2_1);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
