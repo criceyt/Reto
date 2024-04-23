@@ -82,15 +82,14 @@ public class Biblioteca extends JFrame {
 				String textoBusqueda = txtBuscar.getText().trim();
 
 				// Realizar la búsqueda con el texto ingresado
-				buscarJuego(textoBusqueda); // Llamar al método para buscar juegos
+				buscarJuego(textoBusqueda);
 			}
 		});
 
 		// Establecer tamaño específico para el JTextField
 		Dimension textFieldSize = txtBuscar.getPreferredSize();
-		textFieldSize.height = -10; // Modificar la altura a un valor más pequeño
-		txtBuscar.setPreferredSize(new Dimension(120, 0)); // Aplicar el nuevo tamaño
-
+		textFieldSize.height = -10;
+		txtBuscar.setPreferredSize(new Dimension(120, 0));
 		// Agregar un borde inferior al campo de texto
 		txtBuscar.setBorder(BorderFactory.createCompoundBorder(txtBuscar.getBorder(),
 				BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE)));
@@ -98,11 +97,11 @@ public class Biblioteca extends JFrame {
 		// Crear un panel para agregar un margen entre el panel superior y el JTextField
 		JPanel panelTextField = new JPanel(new BorderLayout());
 		panelTextField.setOpaque(false);
-		panelTextField.setBorder(new EmptyBorder(0, 0, 5, 0)); // Margen de 5px en la parte inferior del JTextField
+		panelTextField.setBorder(new EmptyBorder(0, 0, 5, 0));
 
-		panelTextField.add(txtBuscar, BorderLayout.CENTER); // Agregar el JTextField al panel con un margen inferior
+		panelTextField.add(txtBuscar, BorderLayout.CENTER);
 
-		panel_1.add(panelTextField, BorderLayout.WEST); // Agregar el panel con el JTextField al panel superior
+		panel_1.add(panelTextField, BorderLayout.WEST);
 
 		// Utilizando un panel adicional para el logo con GridBagLayout para centrarlo
 		panelLogo = new JPanel(new GridBagLayout());
@@ -151,6 +150,13 @@ public class Biblioteca extends JFrame {
 		btnBuscar_2.setMargin(new Insets(0, 10, 0, 10));
 		btnBuscar_2.setBackground(new Color(255, 102, 102));
 		btnBuscar_2.setAlignmentY(0.0f);
+		btnBuscar_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login cerrar_sesion = new Login();
+				cerrar_sesion.setVisible(true);
+				dispose();
+			}
+		});
 		panelBotones.add(btnBuscar_2);
 
 		panel_1.add(panelBotones, BorderLayout.EAST);
@@ -253,12 +259,13 @@ public class Biblioteca extends JFrame {
 		repaint();
 	}
 
-	private void abrirVentanaJuego(String nombreJuego, String rutaCaratula, String descripcion, double precio,
+	private void abrirVentanaJuego(String rutaCaratula, String nombreJuego, String descripcion, double precio,
 			String usuarioDNI) {
 		if (infoJuego == null) {
-			infoJuego = new InfoJuego(); // Crear o reutilizar la ventana de información
+			infoJuego = new InfoJuego();
+			infoJuego.setventanaBiblio(this);
 		}
-		infoJuego.actualizarInfoJuego(nombreJuego, rutaCaratula, descripcion, precio, usuarioDNI);
+		infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, descripcion, precio, usuarioDNI);
 		infoJuego.setVisible(true); // Mostrar la nueva ventana
 	}
 

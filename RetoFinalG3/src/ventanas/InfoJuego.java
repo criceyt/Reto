@@ -20,27 +20,23 @@ public class InfoJuego extends JFrame {
 	private JButton btnPrecio;
 	private Juego ventanaJuego; // Referencia a la ventana Juego
 	private String usuarioDNI;
+	private Biblioteca ventanaBiblio;
 	private int codJuego = 0;
 
 	// Constructor de InfoJuego
-	public InfoJuego(Juego ventanaJuego, String usuarioDNI) {
-		this.ventanaJuego = ventanaJuego;
-		this.usuarioDNI = usuarioDNI; //
-		// Resto del código del constructor...
-	}
+	public InfoJuego(String usuarioDNI) {
 
-	// Método setter para establecer la referencia a la ventana Juego
-	public void Juego(Juego ventanaJuego) {
-		this.ventanaJuego = ventanaJuego;
+		this.usuarioDNI = usuarioDNI; //
+
 	}
 
 	public InfoJuego() {
 		setTitle("Información del Juego");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(900, 700); // Ajustar la altura predeterminada a 700 píxeles
+		setSize(900, 700);
 		setLocationRelativeTo(null);
 
-		getContentPane().setLayout(new BorderLayout()); // Utilizar BorderLayout en el contenedor principal
+		getContentPane().setLayout(new BorderLayout());
 
 		// Etiqueta para el fondo degradado
 		JLabel fondo = new JLabel() {
@@ -57,7 +53,7 @@ public class InfoJuego extends JFrame {
 
 		// Panel principal con disposición en capas para superponer componentes
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.setOpaque(false); // Hacer el panel transparente
+		panel.setOpaque(false);
 		fondo.setLayout(new OverlayLayout(fondo));
 		fondo.add(panel);
 
@@ -72,9 +68,15 @@ public class InfoJuego extends JFrame {
 
 		setVisible(true);
 	}
-	
 
-	
+	public void setVentanaJuego(Juego ventanaJuego) {
+		this.ventanaJuego = ventanaJuego;
+	}
+
+	public void setventanaBiblio(Biblioteca ventanaBiblio) {
+		this.ventanaBiblio = ventanaBiblio;
+	}
+
 	private JPanel crearPanelSuperior() {
 		JPanel panel_1 = new JPanel(new BorderLayout());
 		panel_1.setBackground(new Color(30, 30, 90));
@@ -121,25 +123,39 @@ public class InfoJuego extends JFrame {
 		btnBuscar_1_1.setMargin(new Insets(2, 10, 2, 10));
 		btnBuscar_1_1.setBackground(new Color(255, 102, 102));
 		panelBotones.add(btnBuscar_1_1);
-		btnBuscar_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Login cerrar_sesion = new Login();
-				cerrar_sesion.setVisible(true);
-				dispose();
-				
+		btnBuscar_1_1.addActionListener(e -> {
+			if (ventanaBiblio != null) {
+				ventanaBiblio.dispose();
 			}
+			if (ventanaJuego != null) {
+				ventanaJuego.dispose();
+			}
+			new Login().setVisible(true);
+			dispose();
 		});
-
 		JButton btnBuscar_1 = new JButton("Biblioteca");
 		btnBuscar_1.setMargin(new Insets(2, 13, 2, 13));
 		btnBuscar_1.setBackground(new Color(255, 102, 102));
 		btnBuscar_1.setPreferredSize(new Dimension(100, 46));
+		btnBuscar_1.addActionListener(c -> {
+			if (ventanaJuego != null) {
+				ventanaJuego.dispose();
+			}
+
+			// Crear y mostrar Biblioteca
+			Biblioteca biblioteca = new Biblioteca(Login.getUsuarioDNI());
+			biblioteca.setVisible(true);
+			dispose();
+
+		});
+
 		panelBotones.add(btnBuscar_1);
 		panelBotones.add(btnBuscar);
 
 		panel_1.add(panelBotones, BorderLayout.EAST);
 
 		return panel_1;
+
 	}
 
 	// Método para actualizar la información del juego
@@ -240,11 +256,11 @@ public class InfoJuego extends JFrame {
 					pstmt = conn.prepareStatement(query);
 
 					// Asignar valores para el insert
-					pstmt.setInt(1, codJuego); // Código del juego
-					pstmt.setString(2, usuarioDNI); // DNI del usuario
-					Date sqlDate = Date.valueOf(LocalDate.now()); // Fecha actual en formato "año-mes-día"
-					pstmt.setDate(3, sqlDate); // Fecha actual
-					pstmt.setInt(4, 1); // Número de unidades (1 por defecto)
+					pstmt.setInt(1, codJuego);
+					pstmt.setString(2, usuarioDNI);
+					Date sqlDate = Date.valueOf(LocalDate.now());
+					pstmt.setDate(3, sqlDate);
+					pstmt.setInt(4, 1);
 
 					// Ejecutar la consulta de inserción
 					pstmt.executeUpdate();
@@ -285,13 +301,13 @@ public class InfoJuego extends JFrame {
 
 		// Descripción del juego
 		txtDescripcion = new JTextArea(descripcion);
-		txtDescripcion.setOpaque(false); // Hacer el área de texto transparente
+		txtDescripcion.setOpaque(false);
 		txtDescripcion.setForeground(Color.WHITE);
 		txtDescripcion.setFont(new Font("Arial", Font.PLAIN, 16));
 		txtDescripcion.setLineWrap(true);
 		txtDescripcion.setWrapStyleWord(true);
 		txtDescripcion.setEditable(false);
-		txtDescripcion.setBounds(340, 100, 500, 250); // Establecer posición y tamaño absolutos
+		txtDescripcion.setBounds(340, 100, 500, 250);
 		panelInfoJuego.add(txtDescripcion);
 
 		// Agregar el panel de información del juego al panel de tabla

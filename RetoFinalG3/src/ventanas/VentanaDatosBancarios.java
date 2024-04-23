@@ -63,8 +63,8 @@ public class VentanaDatosBancarios extends JFrame {
         textField_1 = new JTextField();
         textField_1.setCaretColor(Color.BLACK);
         textField_1.setForeground(new Color(212, 212, 212));
-        textField_1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
-        textField_1.setOpaque(false); // Hacer transparente el JTextField
+        textField_1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); 
+        textField_1.setOpaque(false);
         textField_1.setColumns(10);
         GridBagConstraints gbc_textField_1 = new GridBagConstraints();
         gbc_textField_1.insets = new Insets(0, 0, 5, 0);
@@ -83,8 +83,8 @@ public class VentanaDatosBancarios extends JFrame {
 
         textField = new JTextField();
         textField.setForeground(new Color(212, 212, 212));
-        textField.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
-        textField.setOpaque(false); // Hacer transparente el JTextField
+        textField.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); 
+        textField.setOpaque(false); 
         GridBagConstraints gbc_textField = new GridBagConstraints();
         gbc_textField.insets = new Insets(0, 0, 5, 0);
         gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -104,8 +104,8 @@ public class VentanaDatosBancarios extends JFrame {
 
         textField_2 = new JTextField();
         textField_2.setForeground(new Color(212, 212, 212));
-        textField_2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
-        textField_2.setOpaque(false); // Hacer transparente el JTextField
+        textField_2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); 
+        textField_2.setOpaque(false); 
         textField_2.setColumns(10);
         GridBagConstraints gbc_textField_2 = new GridBagConstraints();
         gbc_textField_2.insets = new Insets(0, 0, 5, 0);
@@ -125,8 +125,8 @@ public class VentanaDatosBancarios extends JFrame {
 
         textField_3 = new JTextField();
         textField_3.setForeground(new Color(212, 212, 212));
-        textField_3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
-        textField_3.setOpaque(false); // Hacer transparente el JTextField
+        textField_3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); 
+        textField_3.setOpaque(false); 
         textField_3.setColumns(10);
         GridBagConstraints gbc_textField_3 = new GridBagConstraints();
         gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;

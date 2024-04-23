@@ -37,8 +37,7 @@ public class singup extends JFrame {
 	private JPasswordField passwordFieldConfirmar;
 	private JButton btnRegistrarse;
 	private JButton btnLogin;
-	private JCheckBox chckbxNewCheckBox; // Declarado a nivel de clase
-
+	private JCheckBox chckbxNewCheckBox; 
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -71,7 +70,7 @@ public class singup extends JFrame {
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo.setIcon(new ImageIcon(".\\.\\img\\logo_G3_2.PNG"));
-		lblLogo.setBounds(50, 125, 300, 250); // Centrado en la parte izquierda
+		lblLogo.setBounds(50, 125, 300, 250); 
 		panel.add(lblLogo);
 
 		JPanel panel_1 = new JPanel();
@@ -221,7 +220,7 @@ public class singup extends JFrame {
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		textField.setForeground(new Color(192, 192, 192));
 		textField.setText(defaultText);
-		textField.setBackground(new Color(7, 41, 120)); // Color ajustado
+		textField.setBackground(new Color(7, 41, 120)); 
 		textField.setBorder(null);
 		textField.setBounds(x, y, width, height);
 		textField.addMouseListener(new MouseAdapter() {
@@ -240,7 +239,7 @@ public class singup extends JFrame {
 		JPasswordField passwordField = new JPasswordField();
 		passwordField.setForeground(new Color(192, 192, 192));
 		passwordField.setToolTipText("");
-		passwordField.setBackground(new Color(7, 41, 120)); // Color ajustado
+		passwordField.setBackground(new Color(7, 41, 120)); 
 		passwordField.setText(defaultText);
 		passwordField.setBorder(null);
 		passwordField.setBounds(x, y, width, height);

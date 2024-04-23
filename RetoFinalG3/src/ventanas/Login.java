@@ -12,7 +12,7 @@ public class Login extends JFrame {
     private JPanel contentPane;
     private JTextField textField;
     private JPasswordField passwordField;
-    private String usuarioDNI;  // Variable para almacenar el DNI del usuario
+    private static String usuarioDNI; 
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -100,7 +100,7 @@ public class Login extends JFrame {
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);
         panel_1.setBackground(new Color(64, 130, 253));
-        panel_1.setBounds(0, 0, 354, 407);
+        panel_1.setBounds(0, 0, 354, 418);
         panel.add(panel_1);
         
         JLabel lblLogo = new JLabel("");
@@ -116,9 +116,9 @@ public class Login extends JFrame {
                 String password = new String(passwordField.getPassword());
 
                 if (authenticate(email, password)) {  // Autenticar el usuario
-                    System.out.println("Inicio de sesión exitoso. DNI: " + usuarioDNI);  // Mensaje de depuración
-                    new Juego(usuarioDNI).setVisible(true);  // Mostrar la ventana de Juego
-                    dispose();  // Cerrar la ventana de inicio de sesión
+                    System.out.println("Inicio de sesión exitoso. DNI: " + getUsuarioDNI());  
+                    new Juego(getUsuarioDNI()).setVisible(true);  
+                    dispose();  
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
                 }
@@ -139,7 +139,7 @@ public class Login extends JFrame {
 private boolean authenticate(String email, String password) {
     boolean isValid = false;
     try {
-        Connection conn = ConexionBD.getConnection();  // Usar la clase de conexión
+        Connection conn = ConexionBD.getConnection();  
         String query = "SELECT DNI FROM PERSONA WHERE EMAIL = ? AND CONTRASEÑA = ?";
         PreparedStatement ps = conn.prepareCall(query);
         ps.setString(1, email);  
@@ -149,7 +149,7 @@ private boolean authenticate(String email, String password) {
 
         if (rs.next()) { 
             isValid = true;  
-            usuarioDNI = rs.getString("DNI");  // Capturar el DNI del usuario autenticado
+            setUsuarioDNI(rs.getString("DNI"));  
         }
 
         rs.close();
@@ -161,5 +161,13 @@ private boolean authenticate(String email, String password) {
     }
 
     return isValid;
+}
+
+public static String getUsuarioDNI() {
+	return usuarioDNI;
+}
+
+public void setUsuarioDNI(String usuarioDNI) {
+	this.usuarioDNI = usuarioDNI;
 }
 }

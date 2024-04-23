@@ -17,10 +17,10 @@ public class Juego extends JFrame {
 	private JPanel panelBotones;
 	private JPanel panelLogo;
 	private InfoJuego infoJuego;
-	private String usuarioDNI; // Almacena el DNI del usuario
+	private String usuarioDNI;
 
 	public Juego(String usuarioDNI) {
-		this.usuarioDNI = usuarioDNI; // Guardar el usuarioDNI para uso posterior
+		this.usuarioDNI = usuarioDNI;
 		// Configurar la ventana
 		setTitle("Catálogo de Juegos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +50,7 @@ public class Juego extends JFrame {
 		gbc.anchor = GridBagConstraints.NORTH;
 		panel.add(crearPanelSuperior(), gbc);
 
-		GridBagConstraints gbcTabla = new GridBagConstraints(); // Nuevo GridBagConstraints para la tabla
+		GridBagConstraints gbcTabla = new GridBagConstraints(); 
 		gbcTabla.fill = GridBagConstraints.BOTH;
 		gbcTabla.gridx = 0;
 		gbcTabla.gridy = 1;
@@ -67,17 +67,16 @@ public class Juego extends JFrame {
 	}
 
 	private JPanel crearPanelSuperior() {
-		JPanel panel_1 = new JPanel(new BorderLayout()); // Utilizando BorderLayout
+		JPanel panel_1 = new JPanel(new BorderLayout()); 
 		panel_1.setBackground(new Color(30, 30, 90));
-		panel_1.setBorder(new EmptyBorder(0, 40, 0, 40)); // Margen vertical de 10px arriba y abajo, y margen lateral de
-															// 40px
+		panel_1.setBorder(new EmptyBorder(0, 40, 0, 40)); 
 
 		txtBuscar = new JTextField("Buscar", 15);
 		txtBuscar.setMinimumSize(new Dimension(7, 0));
 		txtBuscar.setForeground(Color.WHITE);
 		txtBuscar.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 20));
-		txtBuscar.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(192, 192, 192))); // Borde blanco
-		txtBuscar.setBackground(new Color(30, 30, 90)); // Fondo no transparente
+		txtBuscar.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(192, 192, 192))); 
+		txtBuscar.setBackground(new Color(30, 30, 90)); 
 		txtBuscar.setHorizontalAlignment(SwingConstants.LEFT);
 		txtBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -91,8 +90,8 @@ public class Juego extends JFrame {
 
 		// Establecer tamaño específico para el JTextField
 		Dimension textFieldSize = txtBuscar.getPreferredSize();
-		textFieldSize.height = -10; // Modificar la altura a un valor más pequeño
-		txtBuscar.setPreferredSize(new Dimension(120, 0)); // Aplicar el nuevo tamaño
+		textFieldSize.height = -10; 
+		txtBuscar.setPreferredSize(new Dimension(120, 0)); 
 
 		// Agregar un borde inferior al campo de texto
 		txtBuscar.setBorder(BorderFactory.createCompoundBorder(txtBuscar.getBorder(),
@@ -101,11 +100,11 @@ public class Juego extends JFrame {
 		// Crear un panel para agregar un margen entre el panel superior y el JTextField
 		JPanel panelTextField = new JPanel(new BorderLayout());
 		panelTextField.setOpaque(false);
-		panelTextField.setBorder(new EmptyBorder(0, 0, 5, 0)); // Margen de 5px en la parte inferior del JTextField
+		panelTextField.setBorder(new EmptyBorder(0, 0, 5, 0)); 
 
-		panelTextField.add(txtBuscar, BorderLayout.CENTER); // Agregar el JTextField al panel con un margen inferior
+		panelTextField.add(txtBuscar, BorderLayout.CENTER);
 
-		panel_1.add(panelTextField, BorderLayout.WEST); // Agregar el panel con el JTextField al panel superior
+		panel_1.add(panelTextField, BorderLayout.WEST); 
 
 		// Utilizando un panel adicional para el logo con GridBagLayout para centrarlo
 		panelLogo = new JPanel(new GridBagLayout());
@@ -118,7 +117,7 @@ public class Juego extends JFrame {
 		GridBagConstraints gbcLogo = new GridBagConstraints();
 		gbcLogo.gridx = 0;
 		gbcLogo.gridy = 0;
-		gbcLogo.insets = new Insets(0, -100, 0, 0); // Ajuste de margen derecho
+		gbcLogo.insets = new Insets(0, -100, 0, 0); 
 		gbcLogo.anchor = GridBagConstraints.CENTER;
 		panelLogo.add(lblNewLabel, gbcLogo);
 
@@ -128,17 +127,15 @@ public class Juego extends JFrame {
 		panelBotones.setPreferredSize(new Dimension(120, 10));
 		panelBotones.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		panelBotones.setOpaque(false);
-		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS)); // Layout vertical
-
-		// Agregar "glue" vertical al principio del panel para centrar los botones
-		// verticalmente
+		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS)); 
+		
 		panelBotones.add(Box.createVerticalGlue());
 
 		JButton btnBuscar = new JButton("Inicio");
 		btnBuscar.setMargin(new Insets(0, 34, 0, 34));
 		btnBuscar.setAlignmentY(Component.TOP_ALIGNMENT);
 		btnBuscar.setBackground(new Color(255, 102, 102));
-		btnBuscar.setPreferredSize(new Dimension(100, 35)); // Establecer el tamaño del botón
+		btnBuscar.setPreferredSize(new Dimension(100, 35)); 
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Acción del botón "Inicio"
@@ -164,11 +161,11 @@ public class Juego extends JFrame {
 		JButton btnBuscar_1 = new JButton("Biblioteca");
 		btnBuscar_1.setMargin(new Insets(0, 21, 0, 21));
 		btnBuscar_1.setBackground(new Color(255, 102, 102));
-		btnBuscar_1.setPreferredSize(new Dimension(100, 35)); // Establecer el tamaño del botón
+		btnBuscar_1.setPreferredSize(new Dimension(100, 35)); 
 		btnBuscar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Biblioteca biblioteca = new Biblioteca(usuarioDNI); // Pasar el usuarioDNI a la ventana Biblioteca
-				biblioteca.setVisible(true); // Mostrar la ventana de biblioteca
+				Biblioteca biblioteca = new Biblioteca(usuarioDNI); 
+				biblioteca.setVisible(true); 
 				dispose(); // Cerrar la ventana actual
 			}
 		});
@@ -181,8 +178,8 @@ public class Juego extends JFrame {
 	}
 
 	private JScrollPane crearPanelTabla() {
-		panelTabla = new JPanel(new GridLayout(0, 5, 10, 10)); // GridLayout con 5 columnas y sin límite de filas
-		panelTabla.setOpaque(false); // Establecer el panel como transparente
+		panelTabla = new JPanel(new GridLayout(0, 5, 10, 10));
+		panelTabla.setOpaque(false); 
 
 		// Llenar la tabla con los datos de la base de datos
 		try {
@@ -203,7 +200,7 @@ public class Juego extends JFrame {
 		}
 
 		JScrollPane scrollPane = new JScrollPane(panelTabla);
-		scrollPane.getViewport().setOpaque(false); // Establecer el viewport como transparente
+		scrollPane.getViewport().setOpaque(false); 
 		scrollPane.setBorder(null);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
@@ -230,28 +227,28 @@ public class Juego extends JFrame {
 		btnCaratula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Acción al hacer clic en la carátula del juego
-				abrirVentanaJuego(rutaCaratula, nombreJuego, precio, descripcion);
+				abrirVentanaJuego(rutaCaratula, nombreJuego, precio, descripcion, usuarioDNI);
 			}
 		});
 		panelJuego.add(btnCaratula, BorderLayout.CENTER);
 
 		// Panel para el nombre del juego y el precio con un FlowLayout
-		JPanel panelInfo = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0)); // Ajustar el espacio horizontal a 5 y
-																				// vertical a 0
+		JPanel panelInfo = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0)); 
+																				
 		panelInfo.setOpaque(false);
 
 		// Agregar el nombre del juego debajo de la carátula
 		JLabel lblNombreJuego = new JLabel(nombreJuego);
 		lblNombreJuego.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreJuego.setForeground(Color.WHITE); // Establecer el color de la fuente como blanco
-		lblNombreJuego.setFont(new Font("Times New Roman", Font.BOLD, 20)); // Cambiar la fuente y el tamaño
+		lblNombreJuego.setForeground(Color.WHITE); 
+		lblNombreJuego.setFont(new Font("Times New Roman", Font.BOLD, 20)); 
 		panelInfo.add(lblNombreJuego);
 
 		// Agregar el precio a la derecha del nombre del juego
 		JLabel lblPrecio = new JLabel("     €" + String.format("%.2f", precio));
 		lblPrecio.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrecio.setForeground(Color.WHITE); // Establecer el color de la fuente como blanco
-		lblPrecio.setFont(new Font("Times New Roman", Font.PLAIN, 16)); // Cambiar la fuente y el tamaño
+		lblPrecio.setForeground(Color.WHITE); 
+		lblPrecio.setFont(new Font("Times New Roman", Font.PLAIN, 16)); 
 		panelInfo.add(lblPrecio);
 
 		panelJuego.add(panelInfo, BorderLayout.SOUTH);
@@ -265,12 +262,14 @@ public class Juego extends JFrame {
 	}
 
 	// Evitar cerrar la ventana actual
-	private void abrirVentanaJuego(String rutaCaratula, String nombreJuego, double precio, String descripcion) {
+	private void abrirVentanaJuego(String rutaCaratula, String nombreJuego, double precio, String descripcion,
+			String usuarioDNI) {
 		if (infoJuego == null) {
-			infoJuego = new InfoJuego(); // Crear o reutilizar la ventana de información
+			infoJuego = new InfoJuego();
+			infoJuego.setVentanaJuego(this);
 		}
 		infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, descripcion, precio, usuarioDNI);
-		infoJuego.setVisible(true); // Mostrar la nueva ventana
+		infoJuego.setVisible(true); 
 	}
 
 	void restablecerVistaOriginal() {
@@ -321,7 +320,7 @@ public class Juego extends JFrame {
 		}
 
 		revalidate();
-		repaint(); // Actualizar la interfaz después de cambios
+		repaint(); 
 	}
 
 }
