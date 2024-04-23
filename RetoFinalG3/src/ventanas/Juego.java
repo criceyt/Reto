@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.*;
+
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
@@ -151,6 +153,13 @@ public class Juego extends JFrame {
 		btnBuscar_2.setBackground(new Color(255, 102, 102));
 		btnBuscar_2.setAlignmentY(0.0f);
 		panelBotones.add(btnBuscar_2);
+		btnBuscar_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login cerrar_sesion = new Login();
+				cerrar_sesion.setVisible(true);
+				dispose();
+			}
+		});
 
 		JButton btnBuscar_1 = new JButton("Biblioteca");
 		btnBuscar_1.setMargin(new Insets(0, 21, 0, 21));
@@ -213,15 +222,15 @@ public class Juego extends JFrame {
 
 		// Crear botón para la carátula
 		JButton btnCaratula = new JButton();
-		btnCaratula.setBorderPainted(false); // Quitar el borde del botón
-		btnCaratula.setContentAreaFilled(false); // Hacer que el área de contenido del botón sea transparente
-		btnCaratula.setFocusPainted(false); // Quitar el efecto de foco del botón
-		btnCaratula.setIcon(new ImageIcon(rutaCaratula)); // Establecer la carátula como icono del botón
+		btnCaratula.setBorderPainted(false);
+		btnCaratula.setContentAreaFilled(false);
+		btnCaratula.setFocusPainted(false);
+		btnCaratula.setIcon(new ImageIcon(rutaCaratula));
+
 		btnCaratula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Acción al hacer clic en la carátula del juego
-				abrirVentanaJuego(rutaCaratula, nombreJuego, precio, descripcion); // Abre la ventana correspondiente al
-																					// juego seleccionado
+				abrirVentanaJuego(rutaCaratula, nombreJuego, precio, descripcion);
 			}
 		});
 		panelJuego.add(btnCaratula, BorderLayout.CENTER);

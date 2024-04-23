@@ -8,6 +8,8 @@ import java.sql.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import java.awt.*;
+
 public class Biblioteca extends JFrame {
 	private JTextField txtBuscar;
 	private JPanel panelTabla;
@@ -16,8 +18,10 @@ public class Biblioteca extends JFrame {
 	private JPanel panelLogo;
 	private InfoJuego infoJuego;
 	private String usuarioDNI; // Almacena el DNI del usuario
+	private JFrame ventanaPrincipal;
 
 	public Biblioteca(String usuarioDNI) {
+
 		this.usuarioDNI = usuarioDNI; // Guarda el DNI del usuario
 
 		setTitle("Catálogo de Juegos");
@@ -284,8 +288,6 @@ public class Biblioteca extends JFrame {
 		repaint();
 	}
 
-
-
 	private void buscarJuego(String textoBusqueda) {
 		panelTabla.removeAll(); // Limpia la tabla para evitar superposiciones
 
@@ -320,17 +322,13 @@ public class Biblioteca extends JFrame {
 				double precio = rs.getDouble("PRECIO");
 				String descripcion = rs.getString("DESCRIPCION");
 
-				agregarJuego(panelTabla, caratula, nombreJuego, precio, descripcion, usuarioDNI); // Lógica
-																									// para
-																									// agregar
-																									// a la
-																									// tabla
+				agregarJuego(panelTabla, caratula, nombreJuego, precio, descripcion, usuarioDNI);
 			}
 
 			if (!resultadosEncontrados) {
-				// Si no se encuentran resultados, mostrar mensaje o indicar que no hay juegos
+
 				JLabel lblSinResultados = new JLabel("No se encontraron resultados.");
-				panelTabla.add(lblSinResultados); // Agregar a la tabla
+				panelTabla.add(lblSinResultados);
 			}
 
 			rs.close();
@@ -338,7 +336,7 @@ public class Biblioteca extends JFrame {
 			conn.close();
 
 		} catch (SQLException ex) {
-			ex.printStackTrace(); // Imprimir el error para depuración
+			ex.printStackTrace();
 		}
 
 		panelTabla.revalidate(); // Asegúrate de que la tabla se revalide después de la operación
