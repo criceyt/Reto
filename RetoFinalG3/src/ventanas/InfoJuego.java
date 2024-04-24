@@ -32,7 +32,6 @@ public class InfoJuego extends JFrame {
 
 	public InfoJuego() {
 		setTitle("Información del Juego");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(900, 700);
 		setLocationRelativeTo(null);
 

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.sql.*;
 
 import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
@@ -63,19 +64,22 @@ public class Juego extends JFrame {
 	}
 
 	public Juego() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	private JPanel crearPanelSuperior() {
 		JPanel panel_1 = new JPanel(new BorderLayout()); 
 		panel_1.setBackground(new Color(30, 30, 90));
 		panel_1.setBorder(new EmptyBorder(0, 40, 0, 40)); 
-
+		
 		txtBuscar = new JTextField("Buscar", 15);
 		txtBuscar.setMinimumSize(new Dimension(7, 0));
 		txtBuscar.setForeground(Color.WHITE);
 		txtBuscar.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 20));
-		txtBuscar.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(192, 192, 192))); 
+		txtBuscar.setBorder(new CompoundBorder(
+			    new EmptyBorder(5, 0, 0, 0),  // Margen superior para "mover" el texto hacia abajo
+			    new MatteBorder(0, 0, 2, 0, new Color(192, 192, 192))
+			));
 		txtBuscar.setBackground(new Color(30, 30, 90)); 
 		txtBuscar.setHorizontalAlignment(SwingConstants.LEFT);
 		txtBuscar.addActionListener(new ActionListener() {
