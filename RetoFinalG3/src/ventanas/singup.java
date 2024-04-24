@@ -117,6 +117,18 @@ public class Singup extends JFrame {
                 String password = new String(passwordField.getPassword());
                 String confirmarPassword = new String(passwordFieldConfirmar.getPassword());
                 boolean esPremiun = chckbxNewCheckBox.isSelected();
+                // Verificar campos vacíos
+                if (nombre.isEmpty() || apellido.isEmpty() || dni.isEmpty() || 
+                    direccion.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+                    return;
+                }
+
+                // Verificar el formato del correo electrónico
+                if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
+                    JOptionPane.showMessageDialog(null, "Formato de correo electrónico inválido.");
+                    return;
+                }
 
                 // Verificar si las contraseñas coinciden
                 if (!password.equals(confirmarPassword)) {
