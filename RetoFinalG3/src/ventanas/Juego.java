@@ -3,6 +3,12 @@ package ventanas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 
@@ -18,7 +24,7 @@ public class Juego extends JFrame {
 	private JPanel panelLogo;
 	private InfoJuego infoJuego;
 	private String usuarioDNI;
-
+	private JLabel focoInvisible;
 	public Juego(String usuarioDNI) {
 		this.usuarioDNI = usuarioDNI;
 		// Configurar la ventana
@@ -50,7 +56,7 @@ public class Juego extends JFrame {
 		gbc.anchor = GridBagConstraints.NORTH;
 		panel.add(crearPanelSuperior(), gbc);
 
-		GridBagConstraints gbcTabla = new GridBagConstraints(); 
+		GridBagConstraints gbcTabla = new GridBagConstraints();
 		gbcTabla.fill = GridBagConstraints.BOTH;
 		gbcTabla.gridx = 0;
 		gbcTabla.gridy = 1;
@@ -67,45 +73,59 @@ public class Juego extends JFrame {
 	}
 
 	private JPanel crearPanelSuperior() {
-		JPanel panel_1 = new JPanel(new BorderLayout()); 
+		JPanel panel_1 = new JPanel(new BorderLayout()); // Utilizando BorderLayout
 		panel_1.setBackground(new Color(30, 30, 90));
-		panel_1.setBorder(new EmptyBorder(0, 40, 0, 40)); 
+		panel_1.setBorder(new EmptyBorder(0, 40, 0, 40)); // Márgenes
 
+		// Campo de búsqueda
 		txtBuscar = new JTextField("Buscar", 15);
 		txtBuscar.setMinimumSize(new Dimension(7, 0));
 		txtBuscar.setForeground(Color.WHITE);
-		txtBuscar.setFont(new Font("Times New Roman", Font.CENTER_BASELINE, 20));
-		txtBuscar.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(192, 192, 192))); 
-		txtBuscar.setBackground(new Color(30, 30, 90)); 
-		txtBuscar.setHorizontalAlignment(SwingConstants.LEFT);
-		txtBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// Obtener el texto ingresado en el JTextField
-				String textoBusqueda = txtBuscar.getText().trim();
-
-				// Realizar la búsqueda en la base de datos
-				buscarJuego(textoBusqueda);
+		txtBuscar.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		txtBuscar.setToolTipText("Buscar");
+		txtBuscar.setBackground(new Color(30, 30, 90));
+		txtBuscar.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE), // Borde
+																															// inferior
+				BorderFactory.createEmptyBorder(5, 5, -30, 5) // Márgenes interno más pequeños
+		));
+		focoInvisible = new JLabel(); // No tiene texto ni apariencia visible
+		panel_1.add(focoInvisible);
+		// Añadir Listeners para el campo de búsqueda
+		txtBuscar.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) { // Si se presiona Enter
+					buscarJuego(txtBuscar.getText()); // Realiza la búsqueda
+				}
 			}
 		});
 
-		// Establecer tamaño específico para el JTextField
-		Dimension textFieldSize = txtBuscar.getPreferredSize();
-		textFieldSize.height = -10; 
-		txtBuscar.setPreferredSize(new Dimension(120, 0)); 
+		txtBuscar.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) { // Cuando obtiene el foco
+				if (txtBuscar.getText().equals("Buscar")) { // Si está en su estado inicial
+					txtBuscar.setText(""); // Limpia el texto
+				}
+			}
 
-		// Agregar un borde inferior al campo de texto
-		txtBuscar.setBorder(BorderFactory.createCompoundBorder(txtBuscar.getBorder(),
-				BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE)));
+			@Override
+			public void focusLost(FocusEvent e) { // Cuando pierde el foco
+				if (txtBuscar.getText().isEmpty()) { // Si está vacío
+					txtBuscar.setText("Buscar"); // Restablece el texto por defecto
+				}
+			}
+		});
+		// Establecer el foco en el panel principal para que el campo de búsqueda no
+		// tenga foco al inicio
+		SwingUtilities.invokeLater(() -> {
+			focoInvisible.requestFocusInWindow(); // Establece el foco en el componente invisible
+		});
 
-		// Crear un panel para agregar un margen entre el panel superior y el JTextField
+		// Panel adicional para el campo de búsqueda
 		JPanel panelTextField = new JPanel(new BorderLayout());
 		panelTextField.setOpaque(false);
-		panelTextField.setBorder(new EmptyBorder(0, 0, 5, 0)); 
-
 		panelTextField.add(txtBuscar, BorderLayout.CENTER);
 
-		panel_1.add(panelTextField, BorderLayout.WEST); 
-
+		// Logo
 		// Utilizando un panel adicional para el logo con GridBagLayout para centrarlo
 		panelLogo = new JPanel(new GridBagLayout());
 		panelLogo.setOpaque(false);
@@ -117,82 +137,92 @@ public class Juego extends JFrame {
 		GridBagConstraints gbcLogo = new GridBagConstraints();
 		gbcLogo.gridx = 0;
 		gbcLogo.gridy = 0;
-		gbcLogo.insets = new Insets(0, -100, 0, 0); 
+		gbcLogo.insets = new Insets(0, 340, 0, 0);
 		gbcLogo.anchor = GridBagConstraints.CENTER;
 		panelLogo.add(lblNewLabel, gbcLogo);
 
 		panel_1.add(panelLogo, BorderLayout.CENTER);
 
-		panelBotones = new JPanel();
-		panelBotones.setPreferredSize(new Dimension(120, 10));
-		panelBotones.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		// Mensaje de bienvenida
+		JLabel lblBienvenida = new JLabel("Bienvenido: " + Login.getUsuarioNOM() + " " + Login.getUsuarioAPE());
+		lblBienvenida.setForeground(Color.WHITE);
+		lblBienvenida.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lblBienvenida.setBorder(new EmptyBorder(0, 0, 0, 230));
+		// Panel central para colocar el mensaje entre el campo de búsqueda y el logo
+		JPanel panelCentral = new JPanel(new BorderLayout());
+		panelCentral.setOpaque(false);
+
+		panelCentral.add(panelTextField, BorderLayout.WEST); // Campo de búsqueda a la izquierda
+		panelCentral.add(lblBienvenida, BorderLayout.EAST); // Mensaje de bienvenida en el centro
+		panelCentral.add(panelLogo); // Logo a la derecha
+
+		panel_1.add(panelCentral, BorderLayout.CENTER); // Añadir el panel central
+
+		// Panel para los botones
+		JPanel panelBotones = new JPanel();
 		panelBotones.setOpaque(false);
-		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS)); 
-		
+		panelBotones.setPreferredSize(new Dimension(120, 10));
+		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS)); // Layout vertical
+
 		panelBotones.add(Box.createVerticalGlue());
 
-		JButton btnBuscar = new JButton("Inicio");
-		btnBuscar.setMargin(new Insets(0, 34, 0, 34));
-		btnBuscar.setAlignmentY(Component.TOP_ALIGNMENT);
-		btnBuscar.setBackground(new Color(255, 102, 102));
-		btnBuscar.setPreferredSize(new Dimension(100, 35)); 
-		btnBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// Acción del botón "Inicio"
-				restablecerVistaOriginal();
-			}
-		});
-		panelBotones.add(btnBuscar);
+		JButton btnInicio = new JButton("Inicio");
+		btnInicio.setMargin(new Insets(0, 38, 0, 38));
+		btnInicio.setPreferredSize(new Dimension(150, 50));
+		btnInicio.setBackground(new Color(255, 102, 102));
+		panelBotones.add(btnInicio);
 
-		JButton btnBuscar_2 = new JButton("Cerrar sesion");
-		btnBuscar_2.setPreferredSize(new Dimension(100, 36));
-		btnBuscar_2.setMargin(new Insets(0, 10, 0, 10));
-		btnBuscar_2.setBackground(new Color(255, 102, 102));
-		btnBuscar_2.setAlignmentY(0.0f);
-		panelBotones.add(btnBuscar_2);
-		btnBuscar_2.addActionListener(new ActionListener() {
+		JButton btnCerrarSesion = new JButton("Cerrar sesión");
+		btnCerrarSesion.setMargin(new Insets(0, 14, 0, 14));
+		btnCerrarSesion.setPreferredSize(new Dimension(100, 50));
+		btnCerrarSesion.setBackground(new Color(255, 102, 102));
+		panelBotones.add(btnCerrarSesion);
+		btnCerrarSesion.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Crear una nueva ventana de "Login"
+		        Login login = new Login(); 
+		        login.setVisible(true);
+
+		        // Cerrar la ventana actual
+		        dispose(); 
+		    }
+		});
+		JButton btnBiblioteca = new JButton("Biblioteca");
+		btnBiblioteca.setMargin(new Insets(0, 25, 0, 25));
+		btnBiblioteca.setPreferredSize(new Dimension(100, 50));
+		btnBiblioteca.setBackground(new Color(255, 102, 102));
+		panelBotones.add(btnBiblioteca);
+		btnBiblioteca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login cerrar_sesion = new Login();
-				cerrar_sesion.setVisible(true);
+
+				new Biblioteca(usuarioDNI);
 				dispose();
 			}
 		});
 
-		JButton btnBuscar_1 = new JButton("Biblioteca");
-		btnBuscar_1.setMargin(new Insets(0, 21, 0, 21));
-		btnBuscar_1.setBackground(new Color(255, 102, 102));
-		btnBuscar_1.setPreferredSize(new Dimension(100, 35)); 
-		btnBuscar_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Biblioteca biblioteca = new Biblioteca(usuarioDNI); 
-				biblioteca.setVisible(true); 
-				dispose(); // Cerrar la ventana actual
-			}
-		});
-
-		panelBotones.add(btnBuscar_1);
-
-		panel_1.add(panelBotones, BorderLayout.EAST);
+		panel_1.add(panelBotones, BorderLayout.EAST); // Añadir los botones
 
 		return panel_1;
 	}
 
 	private JScrollPane crearPanelTabla() {
 		panelTabla = new JPanel(new GridLayout(0, 5, 10, 10));
-		panelTabla.setOpaque(false); 
+		panelTabla.setOpaque(false);
 
 		// Llenar la tabla con los datos de la base de datos
 		try {
 			Connection conn = ConexionBD.getConnection();
 			PreparedStatement stmt = conn
-					.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION FROM JUEGO");
+					.prepareStatement("SELECT CARATULA, NOMBRE_JUEGO, PRECIO, DESCRIPCION, ANIO, GENERO FROM JUEGO");
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				String rutaCaratula = rs.getString("CARATULA");
 				String nombreJuego = rs.getString("NOMBRE_JUEGO");
 				String descripcion = rs.getString("DESCRIPCION");
+				String ANIO = rs.getString("ANIO");
+				String GENERO = rs.getString("GENERO");
 				double precio = rs.getFloat("PRECIO");
-				agregarJuego(panelBotones, rutaCaratula, nombreJuego, precio, descripcion);
+				agregarJuego(panelBotones, rutaCaratula, nombreJuego, precio, descripcion, ANIO, GENERO);
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -200,7 +230,7 @@ public class Juego extends JFrame {
 		}
 
 		JScrollPane scrollPane = new JScrollPane(panelTabla);
-		scrollPane.getViewport().setOpaque(false); 
+		scrollPane.getViewport().setOpaque(false);
 		scrollPane.setBorder(null);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
@@ -212,7 +242,7 @@ public class Juego extends JFrame {
 	}
 
 	private void agregarJuego(JPanel nuevoPanelTabla, String rutaCaratula, String nombreJuego, double precio,
-			String descripcion) {
+			String descripcion, String ANIO, String GENERO) {
 		// Crear panel para la carátula, el nombre del juego y el precio
 		JPanel panelJuego = new JPanel(new BorderLayout());
 		panelJuego.setOpaque(false);
@@ -227,28 +257,28 @@ public class Juego extends JFrame {
 		btnCaratula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Acción al hacer clic en la carátula del juego
-				abrirVentanaJuego(rutaCaratula, nombreJuego, precio, descripcion, usuarioDNI);
+				abrirVentanaJuego(rutaCaratula, nombreJuego, precio, descripcion, usuarioDNI, ANIO, GENERO);
 			}
 		});
 		panelJuego.add(btnCaratula, BorderLayout.CENTER);
 
 		// Panel para el nombre del juego y el precio con un FlowLayout
-		JPanel panelInfo = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0)); 
-																				
+		JPanel panelInfo = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+
 		panelInfo.setOpaque(false);
 
 		// Agregar el nombre del juego debajo de la carátula
 		JLabel lblNombreJuego = new JLabel(nombreJuego);
 		lblNombreJuego.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreJuego.setForeground(Color.WHITE); 
-		lblNombreJuego.setFont(new Font("Times New Roman", Font.BOLD, 20)); 
+		lblNombreJuego.setForeground(Color.WHITE);
+		lblNombreJuego.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panelInfo.add(lblNombreJuego);
 
 		// Agregar el precio a la derecha del nombre del juego
 		JLabel lblPrecio = new JLabel("     €" + String.format("%.2f", precio));
 		lblPrecio.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrecio.setForeground(Color.WHITE); 
-		lblPrecio.setFont(new Font("Times New Roman", Font.PLAIN, 16)); 
+		lblPrecio.setForeground(Color.WHITE);
+		lblPrecio.setFont(new Font("Times New Roman", Font.PLAIN, 16));
 		panelInfo.add(lblPrecio);
 
 		panelJuego.add(panelInfo, BorderLayout.SOUTH);
@@ -263,13 +293,13 @@ public class Juego extends JFrame {
 
 	// Evitar cerrar la ventana actual
 	private void abrirVentanaJuego(String rutaCaratula, String nombreJuego, double precio, String descripcion,
-			String usuarioDNI) {
+			String usuarioDNI, String ANIO, String GENERO) {
 		if (infoJuego == null) {
 			infoJuego = new InfoJuego();
 			infoJuego.setVentanaJuego(this);
 		}
-		infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, descripcion, precio, usuarioDNI);
-		infoJuego.setVisible(true); 
+		infoJuego.actualizarInfoJuego(rutaCaratula, nombreJuego, precio, descripcion, usuarioDNI, ANIO, GENERO);
+		infoJuego.setVisible(true);
 	}
 
 	void restablecerVistaOriginal() {
@@ -286,7 +316,7 @@ public class Juego extends JFrame {
 				String nombreJuego = rs.getString("NOMBRE_JUEGO");
 				String descripcion = rs.getString("DESCRIPCION");
 				double precio = rs.getDouble("PRECIO");
-				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
+				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion, descripcion, descripcion);
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -313,14 +343,14 @@ public class Juego extends JFrame {
 				String nombreJuego = rs.getString("NOMBRE_JUEGO");
 				String descripcion = rs.getString("DESCRIPCION");
 				double precio = rs.getDouble("PRECIO");
-				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion);
+				agregarJuego(panelTabla, rutaCaratula, nombreJuego, precio, descripcion, descripcion, descripcion);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		revalidate();
-		repaint(); 
+		repaint();
 	}
 
 }
