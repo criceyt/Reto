@@ -9,182 +9,182 @@ import java.awt.event.*;
 import javax.swing.border.MatteBorder;
 
 public class VentanaDatosBancarios extends JFrame {
-    private JTextField numeroTarjeta;
-    private JTextField nombreTrajeta;
-    private JTextField CodigoTrajeta;
-    private JTextField fechaEnvegecimiento;
+	private JTextField numeroTarjeta;
+	private JTextField nombreTarjeta;
+	private JTextField CodigoTrajeta;
+	private JTextField fechaEnvegecimiento;
 
-    boolean bienEsta=true;
-    
-    public VentanaDatosBancarios() {
-        setTitle("Introducir Datos Bancarios");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(588, 445);
-        setLocationRelativeTo(null);
+	boolean bienEsta = false;
+	boolean bienEsta2 = false;
+	boolean bienEsta3 = false;
+	boolean bienEsta4 = false;
 
-        // Panel principal con diseño degradado
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setPaint(new GradientPaint(0, 0, new Color(0, 0, 255), 0, getHeight(), new Color(128, 0, 128)));
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                g2d.dispose();
-            }
-        };
-        panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+	public VentanaDatosBancarios() {
+		setTitle("Introducir Datos Bancarios");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(588, 445);
+		setLocationRelativeTo(null);
 
-        ImageIcon logoIcon = new ImageIcon(".\\.\\img\\logo_G3_2.PNG");
-        JLabel logoLabel = new JLabel(logoIcon);
+		// Panel principal con diseño degradado
+		JPanel panel = new JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D) g.create();
+				g2d.setPaint(new GradientPaint(0, 0, new Color(0, 0, 255), 0, getHeight(), new Color(128, 0, 128)));
+				g2d.fillRect(0, 0, getWidth(), getHeight());
+				g2d.dispose();
+			}
+		};
+		panel.setLayout(new BorderLayout());
+		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
-        // Panel para los campos de entrada
-        GridBagLayout gbl_inputPanel = new GridBagLayout();
-        gbl_inputPanel.columnWeights = new double[]{0.0, 0.0, 1.0};
-        JPanel inputPanel = new JPanel(gbl_inputPanel);
-        inputPanel.setOpaque(false);
+		ImageIcon logoIcon = new ImageIcon(".\\.\\img\\logo_G3_2.PNG");
+		JLabel logoLabel = new JLabel(logoIcon);
 
-       
+		// Panel para los campos de entrada
+		GridBagLayout gbl_inputPanel = new GridBagLayout();
+		gbl_inputPanel.columnWeights = new double[] { 0.0, 0.0, 1.0 };
+		JPanel inputPanel = new JPanel(gbl_inputPanel);
+		inputPanel.setOpaque(false);
 
-        panel.add(logoLabel, BorderLayout.NORTH);
-        panel.add(inputPanel, BorderLayout.CENTER);
+		panel.add(logoLabel, BorderLayout.NORTH);
+		panel.add(inputPanel, BorderLayout.CENTER);
 
-        JLabel lblNewLabel_3 = new JLabel("Nombre en la tarjeta:");
-        lblNewLabel_3.setForeground(Color.GRAY);
-        GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-        gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
-        gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);    
-        gbc_lblNewLabel_3.gridx = 1;
-        gbc_lblNewLabel_3.gridy = 4;
-        inputPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JLabel LabelTarjetaNum = new JLabel("Titular: ");
+		LabelTarjetaNum.setForeground(Color.GRAY);
+		GridBagConstraints gbc_LabelTarjetaNum = new GridBagConstraints();
+		gbc_LabelTarjetaNum.anchor = GridBagConstraints.EAST;
+		gbc_LabelTarjetaNum.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelTarjetaNum.gridx = 1;
+		gbc_LabelTarjetaNum.gridy = 4;
+		inputPanel.add(LabelTarjetaNum, gbc_LabelTarjetaNum);
 
-        nombreTrajeta = new JTextField();
-        nombreTrajeta.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-        nombreTrajeta.setCaretColor(Color.BLACK);
-        nombreTrajeta.setForeground(new Color(212, 212, 212));
-        nombreTrajeta.setOpaque(false); // Hacer transparente el JTextField
-        nombreTrajeta.setColumns(10);
-        GridBagConstraints gbc_nombreTrajeta = new GridBagConstraints();
-        gbc_nombreTrajeta.insets = new Insets(0, 0, 5, 0);
-        gbc_nombreTrajeta.fill = GridBagConstraints.HORIZONTAL;
-        gbc_nombreTrajeta.gridx = 2;
-        gbc_nombreTrajeta.gridy = 4;
-        inputPanel.add(nombreTrajeta, gbc_nombreTrajeta);
+		nombreTarjeta = new JTextField();
+		nombreTarjeta.setCaretColor(Color.BLACK);
+		nombreTarjeta.setForeground(new Color(212, 212, 212));
+		nombreTarjeta.setOpaque(false); // Hacer transparente el JTextField
+		nombreTarjeta.setColumns(10);
+		GridBagConstraints gbc_nombreTarjeta = new GridBagConstraints();
+		gbc_nombreTarjeta.insets = new Insets(0, 0, 5, 0);
+		gbc_nombreTarjeta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_nombreTarjeta.gridx = 2;
+		gbc_nombreTarjeta.gridy = 4;
+		inputPanel.add(nombreTarjeta, gbc_nombreTarjeta);
 
-        JLabel lblNewLabel = new JLabel("Número de tarjeta:");
-        lblNewLabel.setForeground(Color.GRAY);
-        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-        gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNewLabel.gridx = 1;
-        gbc_lblNewLabel.gridy = 5;
-        inputPanel.add(lblNewLabel, gbc_lblNewLabel);
+		JLabel LabelTrajetaNum2 = new JLabel("Número de tarjeta:");
+		LabelTrajetaNum2.setForeground(Color.GRAY);
+		GridBagConstraints gbc_LabelTrajetaNum2 = new GridBagConstraints();
+		gbc_LabelTrajetaNum2.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelTrajetaNum2.gridx = 1;
+		gbc_LabelTrajetaNum2.gridy = 5;
+		inputPanel.add(LabelTrajetaNum2, gbc_LabelTrajetaNum2);
 
-        numeroTarjeta = new JTextField();
-        numeroTarjeta.setForeground(new Color(212, 212, 212));
-        numeroTarjeta.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
-        numeroTarjeta.setOpaque(false); // Hacer transparente el JTextField
-        GridBagConstraints gbc_numeroTarjeta = new GridBagConstraints();
-        gbc_numeroTarjeta.insets = new Insets(0, 0, 5, 0);
-        gbc_numeroTarjeta.fill = GridBagConstraints.HORIZONTAL;
-        gbc_numeroTarjeta.gridx = 2;
-        gbc_numeroTarjeta.gridy = 5;
-        inputPanel.add(numeroTarjeta, gbc_numeroTarjeta);
-        numeroTarjeta.setColumns(10);
+		numeroTarjeta = new JTextField();
+		numeroTarjeta.setForeground(new Color(212, 212, 212));
+		numeroTarjeta.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
+		numeroTarjeta.setOpaque(false); // Hacer transparente el JTextField
+		GridBagConstraints gbc_numeroTarjeta = new GridBagConstraints();
+		gbc_numeroTarjeta.insets = new Insets(0, 0, 5, 0);
+		gbc_numeroTarjeta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_numeroTarjeta.gridx = 2;
+		gbc_numeroTarjeta.gridy = 5;
+		inputPanel.add(numeroTarjeta, gbc_numeroTarjeta);
+		numeroTarjeta.setColumns(10);
 
-        JLabel lblNewLabel_1 = new JLabel("Código de seguridad:");
-        lblNewLabel_1.setForeground(Color.GRAY);
-        GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-        gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-        gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNewLabel_1.gridx = 1;
-        gbc_lblNewLabel_1.gridy = 6;
-        inputPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel LabelTarjetaNum3 = new JLabel("Código de seguridad:");
+		LabelTarjetaNum3.setForeground(Color.GRAY);
+		GridBagConstraints gbc_LabelTarjetaNum3 = new GridBagConstraints();
+		gbc_LabelTarjetaNum3.anchor = GridBagConstraints.EAST;
+		gbc_LabelTarjetaNum3.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelTarjetaNum3.gridx = 1;
+		gbc_LabelTarjetaNum3.gridy = 6;
+		inputPanel.add(LabelTarjetaNum3, gbc_LabelTarjetaNum3);
 
-        CodigoTrajeta = new JTextField();
-        CodigoTrajeta.setForeground(new Color(212, 212, 212));
-        CodigoTrajeta.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
-        CodigoTrajeta.setOpaque(false); // Hacer transparente el JTextField
-        CodigoTrajeta.setColumns(10);
-        GridBagConstraints gbc_CodigoTrajeta = new GridBagConstraints();
-        gbc_CodigoTrajeta.insets = new Insets(0, 0, 5, 0);
-        gbc_CodigoTrajeta.fill = GridBagConstraints.HORIZONTAL;
-        gbc_CodigoTrajeta.gridx = 2;
-        gbc_CodigoTrajeta.gridy = 6;
-        inputPanel.add(CodigoTrajeta, gbc_CodigoTrajeta);
+		CodigoTrajeta = new JTextField();
+		CodigoTrajeta.setForeground(new Color(212, 212, 212));
+		CodigoTrajeta.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
+		CodigoTrajeta.setOpaque(false); // Hacer transparente el JTextField
+		CodigoTrajeta.setColumns(10);
+		GridBagConstraints gbc_CodigoTrajeta = new GridBagConstraints();
+		gbc_CodigoTrajeta.insets = new Insets(0, 0, 5, 0);
+		gbc_CodigoTrajeta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_CodigoTrajeta.gridx = 2;
+		gbc_CodigoTrajeta.gridy = 6;
+		inputPanel.add(CodigoTrajeta, gbc_CodigoTrajeta);
 
-        JLabel lblNewLabel_2 = new JLabel("Fecha de vencimiento:");
-        lblNewLabel_2.setForeground(Color.GRAY);
-        GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-        gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-        gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
-        gbc_lblNewLabel_2.gridx = 1;
-        gbc_lblNewLabel_2.gridy = 7;
-        inputPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel LabelTarjetaNum4 = new JLabel("Fecha de vencimiento:");
+		LabelTarjetaNum4.setForeground(Color.GRAY);
+		GridBagConstraints gbc_LabelTarjetaNum4 = new GridBagConstraints();
+		gbc_LabelTarjetaNum4.anchor = GridBagConstraints.EAST;
+		gbc_LabelTarjetaNum4.insets = new Insets(0, 0, 0, 5);
+		gbc_LabelTarjetaNum4.gridx = 1;
+		gbc_LabelTarjetaNum4.gridy = 7;
+		inputPanel.add(LabelTarjetaNum4, gbc_LabelTarjetaNum4);
 
-        fechaEnvegecimiento = new JTextField();
-        fechaEnvegecimiento.setForeground(new Color(212, 212, 212));
-        fechaEnvegecimiento.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
-        fechaEnvegecimiento.setOpaque(false); // Hacer transparente el JTextField
-        fechaEnvegecimiento.setColumns(10);
-        GridBagConstraints gbc_fechaEnvegecimiento = new GridBagConstraints();
-        gbc_fechaEnvegecimiento.fill = GridBagConstraints.HORIZONTAL;
-        gbc_fechaEnvegecimiento.gridx = 2;
-        gbc_fechaEnvegecimiento.gridy = 7;
-        inputPanel.add(fechaEnvegecimiento, gbc_fechaEnvegecimiento);
+		fechaEnvegecimiento = new JTextField();
+		fechaEnvegecimiento.setForeground(new Color(212, 212, 212));
+		fechaEnvegecimiento.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Borde inferior
+		fechaEnvegecimiento.setOpaque(false); // Hacer transparente el JTextField
+		fechaEnvegecimiento.setColumns(10);
+		GridBagConstraints gbc_fechaEnvegecimiento = new GridBagConstraints();
+		gbc_fechaEnvegecimiento.fill = GridBagConstraints.HORIZONTAL;
+		gbc_fechaEnvegecimiento.gridx = 2;
+		gbc_fechaEnvegecimiento.gridy = 7;
+		inputPanel.add(fechaEnvegecimiento, gbc_fechaEnvegecimiento);
 
-        // Botón de enviar
-        JButton enviarButton = new JButton("Enviar");
-        enviarButton.setBackground(new Color(255, 102, 102));
-        enviarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	if(nombreTrajeta != null && nombreTrajeta.getText().isEmpty())  {
-            		bienEsta=true;
-            	}else{
-            		bienEsta=false;
-            		nombreTrajeta.setBackground(Color.RED);
-            	}
-            		
-            		if (numeroTarjeta != null && numeroTarjeta.getText().matches("\\d+")) {
-            			bienEsta=true;
-            		}else{
-            			bienEsta=false;
-            		}
-						if (CodigoTrajeta != null && CodigoTrajeta.getText().matches("\\d+") ) {
-							bienEsta=true;
-							
-							
-						} else {
-							bienEsta=false;
-						}
-						
-						
-					
-            	
-            		
-            	
-            	if(bienEsta==true) {
-            		JOptionPane.showMessageDialog(null, "Tu Registro ha sido completado con exito","BIENVENIDO" , JOptionPane.INFORMATION_MESSAGE);
-            	}
-            	if (bienEsta==false) {
-					JOptionPane.showMessageDialog(null, "Error el Campo de color rojo no es Valido", "DATOS ERRONEOS", JOptionPane.ERROR_MESSAGE);
+		// Botón de enviar
+		JButton enviarButton = new JButton("Enviar");
+		enviarButton.setBackground(new Color(255, 102, 102));
+		enviarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (nombreTarjeta.getText().isEmpty()) {
+					LabelTarjetaNum.setForeground(Color.RED);
+					bienEsta = true;
+				} else {
+					LabelTarjetaNum.setForeground(Color.WHITE);
 				}
-            
-            }
-        });
-        
-        panel.add(enviarButton, BorderLayout.SOUTH);
+				if (numeroTarjeta.getText().isEmpty()) {
+					LabelTrajetaNum2.setForeground(Color.RED);
+					bienEsta2 = true;
+				} else {
+					LabelTrajetaNum2.setForeground(Color.WHITE);
+				}
+				if (CodigoTrajeta.getText().isEmpty()) {
+					LabelTarjetaNum3.setForeground(Color.RED);
+					bienEsta3 = true;
+				} else {
+					LabelTarjetaNum3.setForeground(Color.WHITE);
+				}
+				if (fechaEnvegecimiento.getText().isEmpty()) {
+					LabelTarjetaNum4.setForeground(Color.RED);
+					bienEsta4 = true;
+				} else {
+					LabelTarjetaNum4.setForeground(Color.WHITE);
+				}
 
-        getContentPane().add(panel);
+				if (!bienEsta || !bienEsta2 || !bienEsta3 || !bienEsta4) {
+					JOptionPane.showMessageDialog(null, "El color de texto en rojo no es valido", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Tus Datos Han sido Guardados con exito",
+							"BIENVENIDO AL SISTEMA", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 
-        setVisible(true);
-    }
+		panel.add(enviarButton, BorderLayout.SOUTH);
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaDatosBancarios();
-            }
-        });
-    }
+		getContentPane().add(panel);
+
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new VentanaDatosBancarios();
+			}
+		});
+	}
 }
