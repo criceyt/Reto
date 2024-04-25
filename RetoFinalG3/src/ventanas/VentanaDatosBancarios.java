@@ -14,10 +14,10 @@ public class VentanaDatosBancarios extends JFrame {
 	private JTextField CodigoTrajeta;
 	private JTextField fechaEnvegecimiento;
 
-	boolean bienEsta = false;
-	boolean bienEsta2 = false;
-	boolean bienEsta3 = false;
-	boolean bienEsta4 = false;
+	boolean bienEsta = true;
+	boolean bienEsta2 = true;
+	boolean bienEsta3 = true;
+	boolean bienEsta4 = true;
 
 	public VentanaDatosBancarios() {
 		setTitle("Introducir Datos Bancarios");
@@ -137,31 +137,57 @@ public class VentanaDatosBancarios extends JFrame {
 		JButton enviarButton = new JButton("Enviar");
 		enviarButton.setBackground(new Color(255, 102, 102));
 		enviarButton.addActionListener(new ActionListener() {
+			// Patron que solo acepta Letras tanto mayusculas como minusculas
+			public static boolean validarLetras(String letras) {
+				return letras.matches("[A-Za-z]*");
+			}
+			// Numero de la tarjeta Obliga a introducir 16 numeros
+			public static boolean validarNumeroTarjeta(String numeros) {
+				return numeros.matches("[0-9]{16}");
+			}
+			// Codigo de seguidad obliga a meter 3 digitos
+			public static boolean validarNumeroSeguridad(String numerosSeguridad) {
+				return numerosSeguridad.matches("[0-9]{3}");
+			}
+			// Valido hasta.... Obliga a meter 2 numeros una barra y otros dos numeros
+			public static boolean validarFecha(String numerosYFecha) {
+				return numerosYFecha.matches("[0-9]{2}/[0-9]{2}");
+			}
+			
 			public void actionPerformed(ActionEvent e) {
-				if (nombreTarjeta.getText().isEmpty()) {
+				// Validar Nombre
+				if (nombreTarjeta.getText().isEmpty() || !validarLetras(nombreTarjeta.getText().trim())) {
 					LabelTarjetaNum.setForeground(Color.RED);
-					bienEsta = true;
+					bienEsta = false;
 				} else {
 					LabelTarjetaNum.setForeground(Color.WHITE);
+					bienEsta = true;
 				}
-				if (numeroTarjeta.getText().isEmpty()) {
+				// Validar numero de tarjeta
+				if (numeroTarjeta.getText().isEmpty() || !validarNumeroTarjeta(numeroTarjeta.getText().trim())) {
 					LabelTrajetaNum2.setForeground(Color.RED);
-					bienEsta2 = true;
+					bienEsta2 = false;
 				} else {
 					LabelTrajetaNum2.setForeground(Color.WHITE);
+					bienEsta2 = true;
 				}
-				if (CodigoTrajeta.getText().isEmpty()) {
+				// Validar codigo de seguridad
+				if (CodigoTrajeta.getText().isEmpty() || !validarNumeroSeguridad(CodigoTrajeta.getText().trim())) {
 					LabelTarjetaNum3.setForeground(Color.RED);
-					bienEsta3 = true;
+					bienEsta3 = false;
 				} else {
 					LabelTarjetaNum3.setForeground(Color.WHITE);
+					bienEsta3 = true;
 				}
-				if (fechaEnvegecimiento.getText().isEmpty()) {
+				// Validar fecha de caducidad
+				if (fechaEnvegecimiento.getText().isEmpty() || !validarFecha(fechaEnvegecimiento.getText().trim())) {
 					LabelTarjetaNum4.setForeground(Color.RED);
-					bienEsta4 = true;
+					bienEsta4 = false;
 				} else {
 					LabelTarjetaNum4.setForeground(Color.WHITE);
+					bienEsta4 = true;
 				}
+				
 
 				if (!bienEsta || !bienEsta2 || !bienEsta3 || !bienEsta4) {
 					JOptionPane.showMessageDialog(null, "El color de texto en rojo no es valido", "Error",
