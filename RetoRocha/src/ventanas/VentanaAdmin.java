@@ -26,25 +26,26 @@ public class VentanaAdmin extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JTextField textField_15;
-	private JTextField textField_16;
-	private JTextField textField_17;
-	private JTextField textField_18;
+	private JTextField txtFieldEmailComprobar;
+	private JTextField txtFieldDNI;
+	private JTextField txtFieldNombre;
+	private JTextField txtFieldApellido;
+	private JTextField txtFieldEdad;
+	private JTextField txtFieldEmail;
+	private JTextField txtFieldDireccion;
+	private JTextField txtFieldDNITrabajadores;
+	private JTextField txtFieldNombreTrabajadores;
+	private JTextField txtFieldApellidoTrabajadores;
+	private JTextField txtFieldEdadTrabajadores;
+	private JTextField txtFieldEmailTrabajadores;
+	private JTextField txtFieldDireccionTrabajadores;
+	private JTextField txtFieldSueldo;
+	private JTextField txtFieldNombreInsertar;
+	private JTextField txtFieldAnio;
+	private JTextField txtFieldPrecio;
+	private JTextField txtFieldContrasena2;
+	private JTextField txtFieldContrasena;
+	private JTextField txtFieldBuscarJuego;
 
 	/**
 	 * Launch the application.
@@ -78,16 +79,16 @@ public class VentanaAdmin extends JDialog {
 		tabbedPane.addTab("GESTIÓN DE CLIENTES  ", null, panel, null);
 		panel.setLayout(null);
 		
-		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setForeground(UIManager.getColor("Button.background"));
-		lblEmail.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblEmail.setBounds(45, 10, 60, 35);
-		panel.add(lblEmail);
+		JLabel lblEmailComprobar = new JLabel("Email:");
+		lblEmailComprobar.setForeground(UIManager.getColor("Button.background"));
+		lblEmailComprobar.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEmailComprobar.setBounds(45, 10, 60, 35);
+		panel.add(lblEmailComprobar);
 		
-		textField = new JTextField();
-		textField.setBounds(115, 17, 297, 25);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtFieldEmailComprobar = new JTextField();
+		txtFieldEmailComprobar.setBounds(115, 17, 297, 25);
+		panel.add(txtFieldEmailComprobar);
+		txtFieldEmailComprobar.setColumns(10);
 		
 		JButton btnComprobar = new JButton("Comprobar");
 		btnComprobar.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -137,76 +138,77 @@ public class VentanaAdmin extends JDialog {
 		lblEdad.setBounds(45, 213, 97, 35);
 		panel.add(lblEdad);
 		
-		JLabel lblEmail_1 = new JLabel("Email:");
-		lblEmail_1.setForeground(UIManager.getColor("Button.background"));
-		lblEmail_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblEmail_1.setBounds(373, 73, 97, 35);
-		panel.add(lblEmail_1);
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setForeground(UIManager.getColor("Button.background"));
+		lblEmail.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEmail.setBounds(373, 73, 97, 35);
+		panel.add(lblEmail);
 		
-		JLabel lblApellido_1 = new JLabel("Dirección:");
-		lblApellido_1.setForeground(UIManager.getColor("Button.background"));
-		lblApellido_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblApellido_1.setBounds(373, 123, 97, 35);
-		panel.add(lblApellido_1);
+		JLabel lblDireccion = new JLabel("Dirección:");
+		lblDireccion.setForeground(UIManager.getColor("Button.background"));
+		lblDireccion.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblDireccion.setBounds(373, 123, 97, 35);
+		panel.add(lblDireccion);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Usuario premium");
-		chckbxNewCheckBox.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		chckbxNewCheckBox.setForeground(new Color(240, 240, 240));
-		chckbxNewCheckBox.setBackground(new Color(0, 0, 160));
-		chckbxNewCheckBox.setBounds(539, 259, 165, 21);
-		panel.add(chckbxNewCheckBox);
+		JCheckBox chckbxPremium = new JCheckBox("Usuario premium");
+		chckbxPremium.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		chckbxPremium.setForeground(new Color(240, 240, 240));
+		chckbxPremium.setBackground(new Color(0, 0, 160));
+		chckbxPremium.setBounds(539, 259, 165, 21);
+		panel.add(chckbxPremium);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(125, 80, 224, 25);
-		panel.add(textField_1);
+		txtFieldDNI = new JTextField();
+		txtFieldDNI.setColumns(10);
+		txtFieldDNI.setBounds(125, 80, 224, 25);
+		panel.add(txtFieldDNI);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(125, 130, 224, 25);
-		panel.add(textField_2);
+		txtFieldNombre = new JTextField();
+		txtFieldNombre.setColumns(10);
+		txtFieldNombre.setBounds(125, 130, 224, 25);
+		panel.add(txtFieldNombre);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(125, 175, 224, 25);
-		panel.add(textField_3);
+		txtFieldApellido = new JTextField();
+		txtFieldApellido.setColumns(10);
+		txtFieldApellido.setBounds(125, 175, 224, 25);
+		panel.add(txtFieldApellido);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(125, 220, 224, 25);
-		panel.add(textField_4);
+		txtFieldEdad = new JTextField();
+		txtFieldEdad.setColumns(10);
+		txtFieldEdad.setBounds(125, 220, 224, 25);
+		panel.add(txtFieldEdad);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(480, 83, 224, 25);
-		panel.add(textField_5);
+		txtFieldEmail = new JTextField();
+		txtFieldEmail.setColumns(10);
+		txtFieldEmail.setBounds(480, 83, 224, 25);
+		panel.add(txtFieldEmail);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(480, 133, 224, 25);
-		panel.add(textField_6);
+		txtFieldDireccion = new JTextField();
+		txtFieldDireccion.setColumns(10);
+		txtFieldDireccion.setBounds(480, 133, 224, 25);
+		panel.add(txtFieldDireccion);
 		
-		textField_17 = new JTextField();
-		textField_17.setColumns(10);
-		textField_17.setBounds(480, 220, 224, 25);
-		panel.add(textField_17);
+		txtFieldContrasena2 = new JTextField();
+		txtFieldContrasena2.setColumns(10);
+		txtFieldContrasena2.setBounds(480, 220, 224, 25);
+		panel.add(txtFieldContrasena2);
 		
-		JLabel lblApellido_1_2 = new JLabel("Confirma");
-		lblApellido_1_2.setForeground(UIManager.getColor("Button.background"));
-		lblApellido_1_2.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblApellido_1_2.setBounds(373, 201, 97, 35);
-		panel.add(lblApellido_1_2);
+		JLabel lblContrasena2 = new JLabel("Confirma");
+		lblContrasena2.setForeground(UIManager.getColor("Button.background"));
+		lblContrasena2.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblContrasena2.setBounds(373, 201, 97, 35);
+		panel.add(lblContrasena2);
 		
-		JLabel lblEmail_1_2 = new JLabel("Contraseña:");
-		lblEmail_1_2.setForeground(UIManager.getColor("Button.background"));
-		lblEmail_1_2.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblEmail_1_2.setBounds(373, 168, 97, 35);
-		panel.add(lblEmail_1_2);
+		JLabel lblContrasena = new JLabel("Contraseña:");
+		lblContrasena.setForeground(UIManager.getColor("Button.background"));
+		lblContrasena.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblContrasena.setBounds(373, 168, 97, 35);
+		panel.add(lblContrasena);
 		
-		textField_18 = new JTextField();
-		textField_18.setColumns(10);
-		textField_18.setBounds(480, 178, 224, 25);
-		panel.add(textField_18);
+		txtFieldContrasena = new JTextField();
+		txtFieldContrasena.setColumns(10);
+		txtFieldContrasena.setBounds(480, 178, 224, 25);
+		panel.add(txtFieldContrasena);
+		
 		
 		JLabel lblApellido_1_2_1 = new JLabel("contraseña:");
 		lblApellido_1_2_1.setForeground(UIManager.getColor("Button.background"));
@@ -219,59 +221,61 @@ public class VentanaAdmin extends JDialog {
 		panel_2.setBackground(new Color(0, 0, 160));
 		tabbedPane.addTab("INSERTAR JUEGO", null, panel_2, null);
 		
-		JLabel lblNewLabel_2 = new JLabel("Descripcion:");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_2.setBounds(242, 194, 89, 28);
-		panel_2.add(lblNewLabel_2);
+		JLabel lblDescripcion = new JLabel("Descripcion:");
+		lblDescripcion.setForeground(Color.WHITE);
+		lblDescripcion.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblDescripcion.setBounds(242, 194, 102, 28);
+		panel_2.add(lblDescripcion);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setLineWrap(true);
-		textArea.setBounds(242, 222, 318, 99);
-		panel_2.add(textArea);
+		JTextArea textAreaDescripcion = new JTextArea();
+		textAreaDescripcion.setLineWrap(true);
+		textAreaDescripcion.setBounds(242, 222, 318, 99);
+		panel_2.add(textAreaDescripcion);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("Nombre: ");
-		lblNewLabel_2_1.setForeground(Color.WHITE);
-		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_2_1.setBounds(351, 61, 89, 28);
-		panel_2.add(lblNewLabel_2_1);
+		JLabel lblNombreInsertar = new JLabel("Nombre: ");
+		lblNombreInsertar.setForeground(Color.WHITE);
+		lblNombreInsertar.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombreInsertar.setBounds(351, 61, 89, 28);
+		panel_2.add(lblNombreInsertar);
 		
-		JLabel lblNewLabel_2_2 = new JLabel("Año:");
-		lblNewLabel_2_2.setForeground(Color.WHITE);
-		lblNewLabel_2_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_2_2.setBounds(351, 100, 89, 28);
-		panel_2.add(lblNewLabel_2_2);
+		JLabel lblAnio = new JLabel("Año:");
+		lblAnio.setForeground(Color.WHITE);
+		lblAnio.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAnio.setBounds(351, 100, 89, 28);
+		panel_2.add(lblAnio);
 		
-		JLabel lblNewLabel_2_3 = new JLabel("Precio:");
-		lblNewLabel_2_3.setForeground(Color.WHITE);
-		lblNewLabel_2_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_2_3.setBounds(351, 139, 89, 28);
-		panel_2.add(lblNewLabel_2_3);
+		JLabel lblPrecio = new JLabel("Precio:");
+		lblPrecio.setForeground(Color.WHITE);
+		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrecio.setBounds(351, 139, 89, 28);
+		panel_2.add(lblPrecio);
 		
-		textField_14 = new JTextField();
-		textField_14.setColumns(10);
-		textField_14.setBounds(425, 67, 152, 20);
-		panel_2.add(textField_14);
+		txtFieldNombreInsertar = new JTextField();
+		txtFieldNombreInsertar.setColumns(10);
+		txtFieldNombreInsertar.setBounds(425, 67, 152, 20);
+		panel_2.add(txtFieldNombreInsertar);
 		
-		textField_15 = new JTextField();
-		textField_15.setColumns(10);
-		textField_15.setBounds(425, 106, 152, 20);
-		panel_2.add(textField_15);
+		txtFieldAnio = new JTextField();
+		txtFieldAnio.setColumns(10);
+		txtFieldAnio.setBounds(425, 106, 152, 20);
+		panel_2.add(txtFieldAnio);
 		
-		textField_16 = new JTextField();
-		textField_16.setColumns(10);
-		textField_16.setBounds(425, 145, 152, 20);
-		panel_2.add(textField_16);
+		txtFieldPrecio = new JTextField();
+		txtFieldPrecio.setColumns(10);
+		txtFieldPrecio.setBounds(425, 145, 152, 20);
+		panel_2.add(txtFieldPrecio);
 		
-		JButton enviarButton_1_1 = new JButton("Limpiar");
-		enviarButton_1_1.setBackground(new Color(255, 102, 102));
-		enviarButton_1_1.setBounds(603, 223, 154, 35);
-		panel_2.add(enviarButton_1_1);
+		JButton btnLimpiarInsertar = new JButton("Limpiar");
+		btnLimpiarInsertar.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnLimpiarInsertar.setBackground(new Color(255, 102, 102));
+		btnLimpiarInsertar.setBounds(603, 223, 154, 35);
+		panel_2.add(btnLimpiarInsertar);
 		
-		JButton enviarButton_2 = new JButton("Insertar Juego");
-		enviarButton_2.setBackground(new Color(255, 102, 102));
-		enviarButton_2.setBounds(603, 284, 154, 35);
-		panel_2.add(enviarButton_2);
+		JButton btnInsertarJuego = new JButton("Insertar Juego");
+		btnInsertarJuego.setFont(new Font("Arial", Font.PLAIN, 17));
+		btnInsertarJuego.setBackground(new Color(255, 102, 102));
+		btnInsertarJuego.setBounds(603, 284, 154, 35);
+		panel_2.add(btnInsertarJuego);
 		
 		JLabel lblImagen = new JLabel("");
 		lblImagen.setBounds(85, 70, 118, 97);
@@ -283,130 +287,147 @@ public class VentanaAdmin extends JDialog {
 		tabbedPane.addTab("STOCK", null, panel_1, null);
 		panel_1.setLayout(null);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-		spinner.setBounds(331, 142, 122, 27);
-		panel_1.add(spinner);
+		JSpinner spinnerCantidad = new JSpinner();
+		spinnerCantidad.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+		spinnerCantidad.setBounds(331, 180, 122, 27);
+		panel_1.add(spinnerCantidad);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(234, 63, 319, 27);
-		panel_1.add(comboBox_1);
+		JComboBox comboBoxJuego = new JComboBox();
+		comboBoxJuego.setBounds(234, 112, 319, 27);
+		panel_1.add(comboBoxJuego);
 		
 		JLabel lblNewLabel = new JLabel("Nombre del juego:");
 		lblNewLabel.setForeground(new Color(240, 240, 240));
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblNewLabel.setBounds(234, 29, 319, 35);
+		lblNewLabel.setBounds(234, 78, 319, 35);
 		panel_1.add(lblNewLabel);
 		
 		JLabel lblCantidad = new JLabel("Cantidad:");
 		lblCantidad.setForeground(new Color(240, 240, 240));
 		lblCantidad.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblCantidad.setBounds(234, 111, 319, 35);
+		lblCantidad.setBounds(234, 149, 319, 35);
 		panel_1.add(lblCantidad);
 		
 		JLabel lblNewLabel_1 = new JLabel("Proveedor:");
 		lblNewLabel_1.setForeground(new Color(240, 240, 240));
 		lblNewLabel_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(234, 180, 319, 35);
+		lblNewLabel_1.setBounds(234, 207, 319, 35);
 		panel_1.add(lblNewLabel_1);
 		
-		JComboBox comboBox_1_1 = new JComboBox();
-		comboBox_1_1.setBounds(234, 214, 319, 27);
-		panel_1.add(comboBox_1_1);
+		JComboBox comboBoxProveedor = new JComboBox();
+		comboBoxProveedor.setBounds(234, 241, 319, 27);
+		panel_1.add(comboBoxProveedor);
 		
-		JButton enviarButton = new JButton("Enviar");
-		enviarButton.setFont(new Font("Arial", Font.PLAIN, 20));
-		enviarButton.setBackground(new Color(255, 102, 102));
-		enviarButton.setBounds(399, 278, 154, 35);
-		panel_1.add(enviarButton);
+		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnEnviar.setBackground(new Color(255, 102, 102));
+		btnEnviar.setBounds(399, 278, 154, 35);
+		panel_1.add(btnEnviar);
 		
-		JButton enviarButton_1 = new JButton("Limpiar");
-		enviarButton_1.setFont(new Font("Arial", Font.PLAIN, 20));
-		enviarButton_1.setBackground(new Color(255, 102, 102));
-		enviarButton_1.setBounds(234, 278, 154, 35);
-		panel_1.add(enviarButton_1);
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnLimpiar.setBackground(new Color(255, 102, 102));
+		btnLimpiar.setBounds(234, 278, 154, 35);
+		panel_1.add(btnLimpiar);
+		
+		JLabel lblNewLabel_3 = new JLabel("Nombre del juego:");
+		lblNewLabel_3.setForeground(UIManager.getColor("Button.background"));
+		lblNewLabel_3.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblNewLabel_3.setBounds(234, 10, 319, 35);
+		panel_1.add(lblNewLabel_3);
+		
+		txtFieldBuscarJuego = new JTextField();
+		txtFieldBuscarJuego.setBounds(234, 44, 186, 35);
+		panel_1.add(txtFieldBuscarJuego);
+		txtFieldBuscarJuego.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnBuscar.setBackground(new Color(255, 102, 102));
+		btnBuscar.setBounds(430, 44, 122, 35);
+		panel_1.add(btnBuscar);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(0, 0, 160));
 		tabbedPane.addTab("INSERTAR TRABAJADORES", null, panel_3, null);
 		panel_3.setLayout(null);
 		
-		JLabel lblDni_1 = new JLabel("DNI:");
-		lblDni_1.setForeground(UIManager.getColor("Button.background"));
-		lblDni_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblDni_1.setBounds(48, 72, 115, 35);
-		panel_3.add(lblDni_1);
+		JLabel lblDniTrabajadores = new JLabel("DNI:");
+		lblDniTrabajadores.setForeground(UIManager.getColor("Button.background"));
+		lblDniTrabajadores.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblDniTrabajadores.setBounds(48, 72, 115, 35);
+		panel_3.add(lblDniTrabajadores);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(128, 79, 224, 25);
-		panel_3.add(textField_7);
+		txtFieldDNITrabajadores = new JTextField();
+		txtFieldDNITrabajadores.setColumns(10);
+		txtFieldDNITrabajadores.setBounds(128, 79, 224, 25);
+		panel_3.add(txtFieldDNITrabajadores);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(128, 129, 224, 25);
-		panel_3.add(textField_8);
+		txtFieldNombreTrabajadores = new JTextField();
+		txtFieldNombreTrabajadores.setColumns(10);
+		txtFieldNombreTrabajadores.setBounds(128, 129, 224, 25);
+		panel_3.add(txtFieldNombreTrabajadores);
 		
-		JLabel lblNombre_1 = new JLabel("Nombre:");
-		lblNombre_1.setForeground(UIManager.getColor("Button.background"));
-		lblNombre_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblNombre_1.setBounds(48, 122, 97, 35);
-		panel_3.add(lblNombre_1);
+		JLabel lblNombreTrabajadores = new JLabel("Nombre:");
+		lblNombreTrabajadores.setForeground(UIManager.getColor("Button.background"));
+		lblNombreTrabajadores.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblNombreTrabajadores.setBounds(48, 122, 97, 35);
+		panel_3.add(lblNombreTrabajadores);
 		
-		JLabel lblApellido_2 = new JLabel("Apellido:");
-		lblApellido_2.setForeground(UIManager.getColor("Button.background"));
-		lblApellido_2.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblApellido_2.setBounds(48, 167, 97, 35);
-		panel_3.add(lblApellido_2);
+		JLabel lblApellidoTrabajadores = new JLabel("Apellido:");
+		lblApellidoTrabajadores.setForeground(UIManager.getColor("Button.background"));
+		lblApellidoTrabajadores.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblApellidoTrabajadores.setBounds(48, 167, 97, 35);
+		panel_3.add(lblApellidoTrabajadores);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(128, 174, 224, 25);
-		panel_3.add(textField_9);
+		txtFieldApellidoTrabajadores = new JTextField();
+		txtFieldApellidoTrabajadores.setColumns(10);
+		txtFieldApellidoTrabajadores.setBounds(128, 174, 224, 25);
+		panel_3.add(txtFieldApellidoTrabajadores);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(128, 219, 224, 25);
-		panel_3.add(textField_10);
+		txtFieldEdadTrabajadores = new JTextField();
+		txtFieldEdadTrabajadores.setColumns(10);
+		txtFieldEdadTrabajadores.setBounds(128, 219, 224, 25);
+		panel_3.add(txtFieldEdadTrabajadores);
 		
-		JLabel lblEdad_1 = new JLabel("Edad:");
-		lblEdad_1.setForeground(UIManager.getColor("Button.background"));
-		lblEdad_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblEdad_1.setBounds(48, 212, 97, 35);
-		panel_3.add(lblEdad_1);
+		JLabel lblEdadTrabajadores = new JLabel("Edad:");
+		lblEdadTrabajadores.setForeground(UIManager.getColor("Button.background"));
+		lblEdadTrabajadores.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEdadTrabajadores.setBounds(48, 212, 97, 35);
+		panel_3.add(lblEdadTrabajadores);
 		
-		JLabel lblEmail_1_1 = new JLabel("Email:");
-		lblEmail_1_1.setForeground(UIManager.getColor("Button.background"));
-		lblEmail_1_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblEmail_1_1.setBounds(376, 72, 97, 35);
-		panel_3.add(lblEmail_1_1);
+		JLabel lblEmailTrabajadores = new JLabel("Email:");
+		lblEmailTrabajadores.setForeground(UIManager.getColor("Button.background"));
+		lblEmailTrabajadores.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEmailTrabajadores.setBounds(376, 72, 97, 35);
+		panel_3.add(lblEmailTrabajadores);
 		
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(483, 82, 224, 25);
-		panel_3.add(textField_11);
+		txtFieldEmailTrabajadores = new JTextField();
+		txtFieldEmailTrabajadores.setColumns(10);
+		txtFieldEmailTrabajadores.setBounds(483, 82, 224, 25);
+		panel_3.add(txtFieldEmailTrabajadores);
 		
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(483, 132, 224, 25);
-		panel_3.add(textField_12);
+		txtFieldDireccionTrabajadores = new JTextField();
+		txtFieldDireccionTrabajadores.setColumns(10);
+		txtFieldDireccionTrabajadores.setBounds(483, 132, 224, 25);
+		panel_3.add(txtFieldDireccionTrabajadores);
 		
-		JLabel lblApellido_1_1 = new JLabel("Dirección:");
-		lblApellido_1_1.setForeground(UIManager.getColor("Button.background"));
-		lblApellido_1_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblApellido_1_1.setBounds(376, 122, 97, 35);
-		panel_3.add(lblApellido_1_1);
+		JLabel lblDireccionTrabajadores = new JLabel("Dirección:");
+		lblDireccionTrabajadores.setForeground(UIManager.getColor("Button.background"));
+		lblDireccionTrabajadores.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblDireccionTrabajadores.setBounds(376, 122, 97, 35);
+		panel_3.add(lblDireccionTrabajadores);
 		
-		JLabel lblApellido_1_1_1 = new JLabel("Sueldo:");
-		lblApellido_1_1_1.setForeground(UIManager.getColor("Button.background"));
-		lblApellido_1_1_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblApellido_1_1_1.setBounds(376, 167, 97, 35);
-		panel_3.add(lblApellido_1_1_1);
+		JLabel lblSueldo = new JLabel("Sueldo:");
+		lblSueldo.setForeground(UIManager.getColor("Button.background"));
+		lblSueldo.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblSueldo.setBounds(376, 167, 97, 35);
+		panel_3.add(lblSueldo);
 		
-		textField_13 = new JTextField();
-		textField_13.setColumns(10);
-		textField_13.setBounds(483, 177, 224, 25);
-		panel_3.add(textField_13);
+		txtFieldSueldo = new JTextField();
+		txtFieldSueldo.setColumns(10);
+		txtFieldSueldo.setBounds(483, 177, 224, 25);
+		panel_3.add(txtFieldSueldo);
 		
 		JButton btnInsertarTrabajador = new JButton("Insertar trabajador");
 		btnInsertarTrabajador.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -414,10 +435,10 @@ public class VentanaAdmin extends JDialog {
 		btnInsertarTrabajador.setBounds(565, 301, 211, 35);
 		panel_3.add(btnInsertarTrabajador);
 		
-		JButton btnBorrarDatos_1 = new JButton("Borrar datos");
-		btnBorrarDatos_1.setFont(new Font("Arial", Font.PLAIN, 20));
-		btnBorrarDatos_1.setBackground(new Color(255, 102, 102));
-		btnBorrarDatos_1.setBounds(401, 301, 154, 35);
-		panel_3.add(btnBorrarDatos_1);
+		JButton btnBorrarDatosTrabajadores = new JButton("Borrar datos");
+		btnBorrarDatosTrabajadores.setFont(new Font("Arial", Font.PLAIN, 20));
+		btnBorrarDatosTrabajadores.setBackground(new Color(255, 102, 102));
+		btnBorrarDatosTrabajadores.setBounds(401, 301, 154, 35);
+		panel_3.add(btnBorrarDatosTrabajadores);
 	}
 }
