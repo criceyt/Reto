@@ -17,12 +17,14 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 
-public class VentanaAdmin extends JDialog {
+public class VentanaAdmin extends JDialog  implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -50,7 +52,7 @@ public class VentanaAdmin extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		try {
 			VentanaAdmin dialog = new VentanaAdmin();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -440,5 +442,11 @@ public class VentanaAdmin extends JDialog {
 		btnBorrarDatosTrabajadores.setBackground(new Color(255, 102, 102));
 		btnBorrarDatosTrabajadores.setBounds(401, 301, 154, 35);
 		panel_3.add(btnBorrarDatosTrabajadores);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
