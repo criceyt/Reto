@@ -132,10 +132,10 @@ public class VentanaAdmin extends JDialog {
 		lblApellido.setBounds(45, 168, 97, 35);
 		panel.add(lblApellido);
 		
-		JLabel lblEdad = new JLabel("Edad:");
+		JLabel lblEdad = new JLabel("Fecha Nacimiento:");
 		lblEdad.setForeground(UIManager.getColor("Button.background"));
-		lblEdad.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblEdad.setBounds(45, 213, 97, 35);
+		lblEdad.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		lblEdad.setBounds(45, 213, 133, 35);
 		panel.add(lblEdad);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -159,22 +159,22 @@ public class VentanaAdmin extends JDialog {
 		
 		txtFieldDNI = new JTextField();
 		txtFieldDNI.setColumns(10);
-		txtFieldDNI.setBounds(125, 80, 224, 25);
+		txtFieldDNI.setBounds(175, 80, 174, 25);
 		panel.add(txtFieldDNI);
 		
 		txtFieldNombre = new JTextField();
 		txtFieldNombre.setColumns(10);
-		txtFieldNombre.setBounds(125, 130, 224, 25);
+		txtFieldNombre.setBounds(175, 130, 174, 25);
 		panel.add(txtFieldNombre);
 		
 		txtFieldApellido = new JTextField();
 		txtFieldApellido.setColumns(10);
-		txtFieldApellido.setBounds(125, 175, 224, 25);
+		txtFieldApellido.setBounds(175, 175, 174, 25);
 		panel.add(txtFieldApellido);
 		
 		txtFieldEdad = new JTextField();
 		txtFieldEdad.setColumns(10);
-		txtFieldEdad.setBounds(125, 220, 224, 25);
+		txtFieldEdad.setBounds(175, 220, 174, 25);
 		panel.add(txtFieldEdad);
 		
 		txtFieldEmail = new JTextField();
@@ -360,12 +360,12 @@ public class VentanaAdmin extends JDialog {
 		
 		txtFieldDNITrabajadores = new JTextField();
 		txtFieldDNITrabajadores.setColumns(10);
-		txtFieldDNITrabajadores.setBounds(128, 79, 224, 25);
+		txtFieldDNITrabajadores.setBounds(181, 79, 171, 25);
 		panel_3.add(txtFieldDNITrabajadores);
 		
 		txtFieldNombreTrabajadores = new JTextField();
 		txtFieldNombreTrabajadores.setColumns(10);
-		txtFieldNombreTrabajadores.setBounds(128, 129, 224, 25);
+		txtFieldNombreTrabajadores.setBounds(181, 129, 171, 25);
 		panel_3.add(txtFieldNombreTrabajadores);
 		
 		JLabel lblNombreTrabajadores = new JLabel("Nombre:");
@@ -382,18 +382,18 @@ public class VentanaAdmin extends JDialog {
 		
 		txtFieldApellidoTrabajadores = new JTextField();
 		txtFieldApellidoTrabajadores.setColumns(10);
-		txtFieldApellidoTrabajadores.setBounds(128, 174, 224, 25);
+		txtFieldApellidoTrabajadores.setBounds(181, 174, 171, 25);
 		panel_3.add(txtFieldApellidoTrabajadores);
 		
 		txtFieldEdadTrabajadores = new JTextField();
 		txtFieldEdadTrabajadores.setColumns(10);
-		txtFieldEdadTrabajadores.setBounds(128, 219, 224, 25);
+		txtFieldEdadTrabajadores.setBounds(181, 219, 171, 25);
 		panel_3.add(txtFieldEdadTrabajadores);
 		
-		JLabel lblEdadTrabajadores = new JLabel("Edad:");
+		JLabel lblEdadTrabajadores = new JLabel("Fecha Nacimiento:");
 		lblEdadTrabajadores.setForeground(UIManager.getColor("Button.background"));
-		lblEdadTrabajadores.setFont(new Font("Arial Black", Font.PLAIN, 14));
-		lblEdadTrabajadores.setBounds(48, 212, 97, 35);
+		lblEdadTrabajadores.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		lblEdadTrabajadores.setBounds(48, 212, 136, 35);
 		panel_3.add(lblEdadTrabajadores);
 		
 		JLabel lblEmailTrabajadores = new JLabel("Email:");
