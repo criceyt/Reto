@@ -1,0 +1,224 @@
+package vista;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.border.MatteBorder;
+
+public class VentanaDatosBancarios extends JDialog implements ActionListener {
+	private JTextField numeroTarjeta;
+	private JTextField nombreTarjeta;
+	private JTextField CodigoTrajeta;
+	private JTextField fechaEnvegecimiento;
+	private JButton enviarButton;
+	private JLabel LabelTarjetaNum;
+	private JLabel LabelTrajetaNum2;
+	private JLabel LabelTarjetaNum3;
+	private JLabel LabelTarjetaNum4;
+
+	boolean bienEsta = true;
+	boolean bienEsta2 = true;
+	boolean bienEsta3 = true;
+	boolean bienEsta4 = true;
+
+	public VentanaDatosBancarios() {
+		setTitle("Introducir Datos Bancarios");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setSize(588, 445);
+		setLocationRelativeTo(null);
+
+// Panel principal con diseño degradado
+		JPanel panel = new JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D) g.create();
+				g2d.setPaint(new GradientPaint(0, 0, new Color(0, 0, 255), 0, getHeight(), new Color(128, 0, 128)));
+				g2d.fillRect(0, 0, getWidth(), getHeight());
+				g2d.dispose();
+			}
+		};
+		panel.setLayout(new BorderLayout());
+		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+
+		ImageIcon logoIcon = new ImageIcon(".\\.\\img\\logo_G3_2.PNG");
+		JLabel logoLabel = new JLabel(logoIcon);
+
+// Panel para los campos de entrada
+		GridBagLayout gbl_inputPanel = new GridBagLayout();
+		gbl_inputPanel.columnWeights = new double[] { 0.0, 0.0, 1.0 };
+		JPanel inputPanel = new JPanel(gbl_inputPanel);
+		inputPanel.setOpaque(false);
+
+		panel.add(logoLabel, BorderLayout.NORTH);
+		panel.add(inputPanel, BorderLayout.CENTER);
+
+		LabelTarjetaNum = new JLabel("Titular: ");
+		LabelTarjetaNum.setForeground(Color.WHITE);
+		GridBagConstraints gbc_LabelTarjetaNum = new GridBagConstraints();
+		gbc_LabelTarjetaNum.anchor = GridBagConstraints.EAST;
+		gbc_LabelTarjetaNum.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelTarjetaNum.gridx = 1;
+		gbc_LabelTarjetaNum.gridy = 4;
+		inputPanel.add(LabelTarjetaNum, gbc_LabelTarjetaNum);
+
+		nombreTarjeta = new JTextField();
+		nombreTarjeta.setCaretColor(Color.BLACK);
+		nombreTarjeta.setForeground(new Color(212, 212, 212));
+		nombreTarjeta.setOpaque(false); // Hacer transparente el JTextField
+		nombreTarjeta.setColumns(10);
+		GridBagConstraints gbc_nombreTarjeta = new GridBagConstraints();
+		gbc_nombreTarjeta.insets = new Insets(0, 0, 5, 0);
+		gbc_nombreTarjeta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_nombreTarjeta.gridx = 2;
+		gbc_nombreTarjeta.gridy = 4;
+		inputPanel.add(nombreTarjeta, gbc_nombreTarjeta);
+
+		LabelTrajetaNum2 = new JLabel("Número de tarjeta:");
+		LabelTrajetaNum2.setForeground(Color.WHITE);
+		GridBagConstraints gbc_LabelTrajetaNum2 = new GridBagConstraints();
+		gbc_LabelTrajetaNum2.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelTrajetaNum2.gridx = 1;
+		gbc_LabelTrajetaNum2.gridy = 5;
+		inputPanel.add(LabelTrajetaNum2, gbc_LabelTrajetaNum2);
+
+		numeroTarjeta = new JTextField();
+		numeroTarjeta.setForeground(new Color(212, 212, 212));
+		numeroTarjeta.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE)); // Borde inferior
+		numeroTarjeta.setOpaque(false); // Hacer transparente el JTextField
+		GridBagConstraints gbc_numeroTarjeta = new GridBagConstraints();
+		gbc_numeroTarjeta.insets = new Insets(0, 0, 5, 0);
+		gbc_numeroTarjeta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_numeroTarjeta.gridx = 2;
+		gbc_numeroTarjeta.gridy = 5;
+		inputPanel.add(numeroTarjeta, gbc_numeroTarjeta);
+		numeroTarjeta.setColumns(10);
+
+		LabelTarjetaNum3 = new JLabel("Código de seguridad:");
+		LabelTarjetaNum3.setForeground(Color.WHITE);
+		GridBagConstraints gbc_LabelTarjetaNum3 = new GridBagConstraints();
+		gbc_LabelTarjetaNum3.anchor = GridBagConstraints.EAST;
+		gbc_LabelTarjetaNum3.insets = new Insets(0, 0, 5, 5);
+		gbc_LabelTarjetaNum3.gridx = 1;
+		gbc_LabelTarjetaNum3.gridy = 6;
+		inputPanel.add(LabelTarjetaNum3, gbc_LabelTarjetaNum3);
+
+		CodigoTrajeta = new JTextField();
+		CodigoTrajeta.setForeground(new Color(212, 212, 212));
+		CodigoTrajeta.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE)); // Borde inferior
+		CodigoTrajeta.setOpaque(false); // Hacer transparente el JTextField
+		CodigoTrajeta.setColumns(10);
+		GridBagConstraints gbc_CodigoTrajeta = new GridBagConstraints();
+		gbc_CodigoTrajeta.insets = new Insets(0, 0, 5, 0);
+		gbc_CodigoTrajeta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_CodigoTrajeta.gridx = 2;
+		gbc_CodigoTrajeta.gridy = 6;
+		inputPanel.add(CodigoTrajeta, gbc_CodigoTrajeta);
+
+		LabelTarjetaNum4 = new JLabel("Fecha de vencimiento:");
+		LabelTarjetaNum4.setForeground(Color.WHITE);
+		GridBagConstraints gbc_LabelTarjetaNum4 = new GridBagConstraints();
+		gbc_LabelTarjetaNum4.anchor = GridBagConstraints.EAST;
+		gbc_LabelTarjetaNum4.insets = new Insets(0, 0, 0, 5);
+		gbc_LabelTarjetaNum4.gridx = 1;
+		gbc_LabelTarjetaNum4.gridy = 7;
+		inputPanel.add(LabelTarjetaNum4, gbc_LabelTarjetaNum4);
+
+		fechaEnvegecimiento = new JTextField();
+		fechaEnvegecimiento.setForeground(new Color(212, 212, 212));
+		fechaEnvegecimiento.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.WHITE)); // Borde inferior
+		fechaEnvegecimiento.setOpaque(false); // Hacer transparente el JTextField
+		fechaEnvegecimiento.setColumns(10);
+		GridBagConstraints gbc_fechaEnvegecimiento = new GridBagConstraints();
+		gbc_fechaEnvegecimiento.fill = GridBagConstraints.HORIZONTAL;
+		gbc_fechaEnvegecimiento.gridx = 2;
+		gbc_fechaEnvegecimiento.gridy = 7;
+		inputPanel.add(fechaEnvegecimiento, gbc_fechaEnvegecimiento);
+
+// Botón de enviar
+		enviarButton = new JButton("Enviar");
+		enviarButton.setBackground(new Color(255, 102, 102));
+		enviarButton.addActionListener(this);
+
+// Diseño
+		panel.add(enviarButton, BorderLayout.SOUTH);
+		getContentPane().add(panel);
+		setVisible(true);
+	}
+
+// Patron que solo acepta Letras tanto mayusculas como minusculas
+	public static boolean validarLetras(String letras) {
+		return letras.matches("[A-Za-z]*");
+	}
+
+// Numero de la tarjeta Obliga a introducir 16 numeros
+	public static boolean validarNumeroTarjeta(String numeros) {
+		return numeros.matches("[0-9]{16}");
+	}
+
+// Codigo de seguidad obliga a meter 3 digitos
+	public static boolean validarNumeroSeguridad(String numerosSeguridad) {
+		return numerosSeguridad.matches("[0-9]{3}");
+	}
+
+// Valido hasta.... Obliga a meter 2 numeros una barra y otros dos numeros
+	public static boolean validarFecha(String numerosYFecha) {
+		return numerosYFecha.matches("[0-9]{2}/[0-9]{2}");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+// TODO Auto-generated method stub
+		if (e.getSource().equals(enviarButton)) {
+			enviar();
+		}
+	}
+
+	private void enviar() {
+// TODO Auto-generated method stub
+// Validar Nombre
+		if (nombreTarjeta.getText().isEmpty() || !validarLetras(nombreTarjeta.getText().replace(" ", "").trim())) {
+			LabelTarjetaNum.setForeground(Color.RED);
+			bienEsta = false;
+		} else {
+			LabelTarjetaNum.setForeground(Color.WHITE);
+			bienEsta = true;
+		}
+
+// Validar numero de tarjeta
+		if (numeroTarjeta.getText().isEmpty() || !validarNumeroTarjeta(numeroTarjeta.getText().trim())) {
+			LabelTrajetaNum2.setForeground(Color.RED);
+			bienEsta2 = false;
+		} else {
+			LabelTrajetaNum2.setForeground(Color.WHITE);
+			bienEsta2 = true;
+		}
+
+// Validar codigo de seguridad
+		if (CodigoTrajeta.getText().isEmpty() || !validarNumeroSeguridad(CodigoTrajeta.getText().trim())) {
+			LabelTarjetaNum3.setForeground(Color.RED);
+			bienEsta3 = false;
+		} else {
+			LabelTarjetaNum3.setForeground(Color.WHITE);
+			bienEsta3 = true;
+		}
+
+// Validar fecha de caducidad
+		if (fechaEnvegecimiento.getText().isEmpty() || !validarFecha(fechaEnvegecimiento.getText().trim())) {
+			LabelTarjetaNum4.setForeground(Color.RED);
+			bienEsta4 = false;
+		} else {
+			LabelTarjetaNum4.setForeground(Color.WHITE);
+			bienEsta4 = true;
+		}
+
+		if (!bienEsta || !bienEsta2 || !bienEsta3 || !bienEsta4) {
+			JOptionPane.showMessageDialog(null, "El color de texto en rojo no es valido", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "Tus Datos Han sido Guardados con exito", "BIENVENIDO AL SISTEMA",
+					JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
+		}
+	}
+}
