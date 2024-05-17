@@ -1,0 +1,18 @@
+
+
+Version:	3.50
+CmdLine:	E:\Escritorio\Reto_3Eva_G3_Final\tienda.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	E:\Escritorio\Reto_3Eva_G3_Final\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+JRE paths:	E:\Escritorio\eclipse-java-2022-03-R-win32-x86_64\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.2.v20220201-1208\jre\bin
+Check launcher:	E:\Escritorio\eclipse-java-2022-03-R-win32-x86_64\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.2.v20220201-1208\jre\bin\javaw.exe (OK)
+Version string: 1.017.000_002 / 64-Bit (OK)
+Launcher:	E:\Escritorio\eclipse-java-2022-03-R-win32-x86_64\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_17.0.2.v20220201-1208\jre\bin\javaw.exe
+Launcher args:	-jar "E:\Escritorio\Reto_3Eva_G3_Final\tienda.exe"
+Args length:	50/32768 chars
+Exit code:	0
